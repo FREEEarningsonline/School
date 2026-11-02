@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Admin Dashboard - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .empty-state-td {
+            text-align: center !important;
+            padding: 30px 10px !important;
+            color: #94a3b8 !important;
+            font-size: 13px !important;
+        }
+        .empty-state-td i {
+            display: block;
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+        .live-sync-btn {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+        .live-sync-btn:hover { background: #7239ea; color: #fff; border-color: #7239ea; }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOP HEADER -->
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Admin Dashboard</h2>
+            </div>
+            <div class="header-right">
+                <button class="live-sync-btn" onclick="fetchLiveDashboardData()"><i class="fas fa-sync-alt" id="syncIcon"></i> Sync Google DB</button>
+                <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
+                <div class="profile-icon">S</div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            
+            <!-- REAL-TIME DYNAMIC STATS CARDS -->
+            <div class="stats-grid">
+                <!-- Active Students -->
+                <div class="stat-card" style="border-top: 4px solid #17a2b8;">
+                    <div class="stat-icon" style="color: #17a2b8; background: #e0f6f9;"><i class="fas fa-user-graduate"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statActiveStudents">0</h3>
+                        <p>Active Enrolled Students</p>
+                        <small class="text-success" id="statStudentSub">Database synced</small>
+                    </div>
+                </div>
+
+                <!-- Total Collected -->
+                <div class="stat-card" style="border-top: 4px solid #28a745;">
+                    <div class="stat-icon" style="color: #28a745; background: #e6f6eb;"><i class="fas fa-coins"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statTotalCollected">Rs. 0</h3>
+                        <p>Total Fee Revenue</p>
+                        <small id="statTodayCollected">Today: Rs. 0</small>
+                    </div>
+                </div>
+
+                <!-- Pending Fees -->
+                <div class="stat-card" style="border-top: 4px solid #dc3545;">
+                    <div class="stat-icon" style="color: #dc3545; background: #fbe6e8;"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statPendingFees">Rs. 0</h3>
+                        <p>Total Outstanding Dues</p>
+                        <small class="text-danger" id="statDefaulterCount">0 defaulters</small>
+                    </div>
+                </div>
+
+                <!-- Total Expenses -->
+                <div class="stat-card" style="border-top: 4px solid #fd7e14;">
+                    <div class="stat-icon" style="color: #fd7e14; background: #fef0e4;"><i class="fas fa-receipt"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statTotalExpenses">Rs. 0</h3>
+                        <p>Operational Expenses</p>
+                        <small id="statExpenseCount">0 vouchers</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Action Shortcuts -->
+            <h4 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h4>
+            <div class="quick-actions-grid">
+                <a href="new-admission.html" class="action-btn"><i class="fas fa-user-plus text-primary"></i> New Admission</a>
+                <a href="quick-fee.html" class="action-btn"><i class="fas fa-bolt text-success"></i> Quick Fee Collect</a>
+                <a href="attendance.html" class="action-btn"><i class="fas fa-calendar-check text-info"></i> Daily Attendance</a>
+                <a href="all-reports.html" class="action-btn"><i class="fas fa-chart-bar text-purple"></i> All Reports Hub</a>
+            </div>
+
+            <!-- TABLES SECTION -->
+            <div class="tables-grid">
+                
+                <!-- TOP FEE DEFAULTERS -->
+                <div class="data-table-card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-exclamation-circle text-danger"></i> Pending Fee Defaulters</h4>
+                        <a href="whatsapp-reminder.html">Reminders</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>STUDENT</th>
+                                    <th>CLASS</th>
+                                    <th>DUE (RS.)</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="defaultersTableBody">
+                                <tr>
+                                    <td colspan="4" class="empty-state-td">
+                                        <i class="fas fa-spinner fa-spin text-primary"></i>
+                                        Loading real-time data from Google DB...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RECENT PAYMENTS -->
+                <div class="data-table-card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-history text-success"></i> Recent Payment Transactions</h4>
+                        <a href="fee-collection.html">Collect Fee</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>RECEIPT #</th>
+                                    <th>STUDENT</th>
+                                    <th>AMOUNT</th>
+                                    <th>MODE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentsTableBody">
+                                <tr>
+                                    <td colspan="4" class="empty-state-td">
+                                        <i class="fas fa-spinner fa-spin text-primary"></i>
+                                        Loading real-time data from Google DB...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global JS & Real-Time Engine -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
+    
+    <script>
+        async function fetchLiveDashboardData() {
+            const syncIcon = document.getElementById('syncIcon');
+            syncIcon.className = 'fas fa-spinner fa-spin';
+
+            try {
+                // Fetch real-time tabs data in parallel from Google Sheet
+                const [students, fees, expenses] = await Promise.all([
+                    mdaFetchData('students'),
+                    mdaFetchData('fees'),
+                    mdaFetchData('expenses')
+                ]);
+
+                // 1. Active Students Count
+                const activeCount = students.length || 0;
+                document.getElementById('statActiveStudents').innerText = activeCount;
+                document.getElementById('statStudentSub').innerText = `${activeCount} records live`;
+
+                // 2. Fees Calculation
+                let totalCollected = 0;
+                let todayCollected = 0;
+                const todayStr = new Date().toISOString().slice(0, 10);
+
+                fees.forEach(f => {
+                    let amt = parseFloat(f.amount || f.paidAmount || 0);
+                    totalCollected += amt;
+                    let fDate = String(f.date || "").slice(0, 10);
+                    if (fDate === todayStr) {
+                        todayCollected += amt;
+                    }
+                });
+
+                document.getElementById('statTotalCollected').innerText = `Rs. ${totalCollected.toLocaleString()}`;
+                document.getElementById('statTodayCollected').innerText = `Today: Rs. ${todayCollected.toLocaleString()}`;
+
+                // 3. Pending Fees & Defaulters
+                let defaulters = students.filter(s => parseFloat(s.pendingDue || 0) > 0);
+                let totalPending = defaulters.reduce((acc, curr) => acc + (parseFloat(curr.pendingDue) || 0), 0);
+                document.getElementById('statPendingFees').innerText = `Rs. ${totalPending.toLocaleString()}`;
+                document.getElementById('statDefaulterCount').innerText = `${defaulters.length} students due`;
+
+                // Render Defaulters Table
+                const defBody = document.getElementById('defaultersTableBody');
+                if (defaulters.length > 0) {
+                    defBody.innerHTML = '';
+                    defaulters.slice(0, 5).forEach(st => {
+                        defBody.innerHTML += `
+                            <tr>
+                                <td><strong>${st.studentName || st.name || 'Student'}</strong><br><small style="color:#64748b;">${st.admNo || st.admissionNo || ''}</small></td>
+                                <td><span class="class-badge">${st.class || 'Class 10'}</span></td>
+                                <td class="text-danger font-weight-bold">Rs. ${parseFloat(st.pendingDue).toLocaleString()}</td>
+                                <td><a href="fee-collection.html" class="btn-collect" style="text-decoration:none;"><i class="fas fa-bolt"></i> Collect</a></td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    defBody.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="empty-state-td">
+                                <i class="fas fa-check-circle text-success"></i>
+                                No pending fee defaulters found in database.
+                            </td>
+                        </tr>
+                    `;
+                }
+
+                // 4. Expenses Calculation
+                let totalExpenses = expenses.reduce((acc, curr) => acc + (parseFloat(curr.amount || 0), 0), 0);
+                document.getElementById('statTotalExpenses').innerText = `Rs. ${totalExpenses.toLocaleString()}`;
+                document.getElementById('statExpenseCount').innerText = `${expenses.length} vouchers recorded`;
+
+                // 5. Recent Payments Table
+                const payBody = document.getElementById('paymentsTableBody');
+                if (fees.length > 0) {
+                    payBody.innerHTML = '';
+                    fees.slice(-5).reverse().forEach(pm => {
+                        payBody.innerHTML += `
+                            <tr>
+                                <td><strong>${pm.receiptNo || 'RCP-001'}</strong></td>
+                                <td>${pm.studentName || pm.name || 'Student'}</td>
+                                <td class="text-success font-weight-bold">Rs. ${parseFloat(pm.amount || pm.paidAmount || 0).toLocaleString()}</td>
+                                <td><span class="badge" style="background:#f1f5f9; color:#475569;">${pm.mode || 'Cash'}</span></td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    payBody.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="empty-state-td">
+                                <i class="fas fa-receipt text-muted"></i>
+                                No payment transactions recorded yet.
+                            </td>
+                        </tr>
+                    `;
+                }
+
+            } catch (err) {
+                console.error("Dashboard sync error:", err);
+            } finally {
+                syncIcon.className = 'fas fa-sync-alt';
+            }
+        }
+
+        // Load data on page open
+        document.addEventListener('DOMContentLoaded', fetchLiveDashboardData);
+    </script>
+</body>
+</html>

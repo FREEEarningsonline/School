@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Bank Fee Challan Voucher - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            background-color: #52565e;
+            color: #000;
+            min-height: 100vh;
+        }
+
+        /* ================= TOP BAR (SCREEN ONLY) ================= */
+        .top-control-bar {
+            background: #ffffff;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .btn-back {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-print {
+            background: #16a34a;
+            color: #ffffff;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ================= VOUCHER PREVIEW CONTAINER ================= */
+        .voucher-screen-wrapper {
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        /* Standard A4 Landscape Paper Layout (297mm width) */
+        .a4-landscape-sheet {
+            width: 100%;
+            max-width: 1100px;
+            background: #ffffff;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            border-radius: 4px;
+        }
+
+        /* Individual Vertical Slip */
+        .challan-slip {
+            border: 1.5px solid #000;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+            position: relative;
+        }
+
+        /* Scissor Cut Line indicator */
+        .challan-slip:not(:last-child)::after {
+            content: "✂ -------------------------";
+            position: absolute;
+            right: -18px;
+            top: 50%;
+            transform: rotate(90deg);
+            font-size: 8px;
+            color: #94a3b8;
+            pointer-events: none;
+        }
+
+        /* Header */
+        .slip-header {
+            text-align: center;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 4px;
+        }
+        .slip-header h4 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .slip-sub-title {
+            font-size: 9.5px;
+            font-weight: 700;
+            margin-top: 2px;
+            text-decoration: underline;
+        }
+
+        /* Bank Details Box (Fixed UBL) */
+        .bank-info-box {
+            font-size: 8.5px;
+            line-height: 1.25;
+            text-align: center;
+            margin: 4px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #000;
+        }
+        .bank-info-box strong { font-weight: 700; }
+        .acc-number-underline {
+            font-size: 9px;
+            font-weight: 700;
+            border-bottom: 1.5px solid #000;
+            display: inline-block;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Student Metadata Table */
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5px;
+            margin-bottom: 4px;
+        }
+        .meta-table td {
+            padding: 2.5px 1px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: middle;
+        }
+        .meta-table td.label-td {
+            font-weight: 600;
+            color: #333;
+            width: 38%;
+        }
+        .meta-table td.val-td {
+            font-weight: 700;
+            color: #000;
+            width: 62%;
+        }
+
+        /* Fee Heads Table */
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5px;
+            margin: 4px 0;
+            border: 1px solid #000;
+        }
+        .fee-table th {
+            background: #f1f5f9;
+            border: 1px solid #000;
+            padding: 3px 2px;
+            font-size: 8px;
+            font-weight: 700;
+            text-align: left;
+        }
+        .fee-table td {
+            border: 1px solid #000;
+            padding: 3px 2px;
+            font-size: 8.5px;
+        }
+        .fee-table .total-row td {
+            font-weight: 700;
+            background: #f8fafc;
+            border-top: 1.5px solid #000;
+        }
+
+        /* Digital Account Box (Easypaisa / JazzCash) */
+        .digital-acc-box {
+            background: #f8fafc;
+            border: 1px dashed #000;
+            padding: 3px;
+            font-size: 7.5px;
+            line-height: 1.2;
+            margin: 3px 0;
+            text-align: center;
+        }
+
+        /* Signatures Section */
+        .sign-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 15px;
+            padding-top: 10px;
+            font-size: 7.5px;
+            font-weight: 600;
+        }
+        .sign-cell {
+            text-align: center;
+            width: 32%;
+            border-top: 1px solid #000;
+            padding-top: 2px;
+        }
+
+        /* Bottom Copy Identifier */
+        .copy-type-banner {
+            text-align: center;
+            font-size: 9px;
+            font-weight: 700;
+            margin-top: 8px;
+            padding-top: 4px;
+            border-top: 1px solid #000;
+            text-transform: uppercase;
+        }
+
+        /* ================= PRINT RULES (A4 LANDSCAPE) ================= */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 4mm;
+            }
+            body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .voucher-screen-wrapper {
+                padding: 0 !important;
+            }
+            .a4-landscape-sheet {
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                padding: 0 !important;
+                gap: 5px !important;
+            }
+            .challan-slip {
+                border-width: 1px !important;
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .a4-landscape-sheet {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .challan-slip::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN CONTROLS BAR -->
+    <div class="top-control-bar no-print">
+        <a href="student-dashboard.html" class="btn-back"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        <div style="font-size:12px; color:#475569; font-weight:600;">
+            <i class="fas fa-file-invoice-dollar text-success"></i> Real-Time 4-Copy Fee Challan
+        </div>
+        <div>
+            <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print 4-Copy Voucher</button>
+        </div>
+    </div>
+
+    <!-- VOUCHER PREVIEW CANVAS -->
+    <div class="voucher-screen-wrapper">
+        <div class="a4-landscape-sheet" id="challanContainer">
+            <!-- Loading State -->
+            <div style="grid-column: span 4; text-align:center; padding:50px; color:#64748b;">
+                <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching student fee details from Firebase...
+            </div>
+        </div>
+    </div>
+
+    <!-- Real-Time Database Engine -->
+    <script src="assets/js/realtime-db.js"></script>
+    <script>
+        // FIXED SCHOOL PAYMENT ACCOUNTS (Nazim Mustafa UBL & JazzCash)
+        const FIXED_BANK_INFO = {
+            schoolName: "MDA Mustafa Digital Ai School",
+            bankName: "United Bank Limited (UBL)",
+            accTitle: "Nazim Mustafa",
+            accIban: "PK79UNIL0109000409349746",
+            easypaisaJazzCash: "03105784772 (Nazim Mustafa)"
+        };
+
+        const slipTypes = [
+            "Bank Copy",
+            "Account Office Copy",
+            "School / Admin Copy",
+            "Student's Copy"
+        ];
+
+        async function initRealtimeChallan() {
+            // 1. Get Admission No from URL (?adm=MDA-26-XXXX) or Session
+            const urlParams = new URLSearchParams(window.location.search);
+            let targetAdm = urlParams.get('adm');
+
+            if (!targetAdm) {
+                let active = JSON.parse(sessionStorage.getItem('mda_active_student'));
+                if (active) targetAdm = active.admNo || active.admissionNo;
+            }
+
+            // 2. Fetch live students from Firebase
+            let students = await mdaFetchData('students');
+            let student = null;
+
+            if (targetAdm) {
+                student = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+            } else if (students.length > 0) {
+                student = students[0]; // Fallback to first
+                targetAdm = student.admNo || student.admissionNo;
+            }
+
+            if (!student) {
+                document.getElementById('challanContainer').innerHTML = `
+                    <div style="grid-column: span 4; text-align:center; padding:50px; color:#dc2626;">
+                        <h3>Student Not Found in Database!</h3>
+                        <p>Please pass ?adm= parameter in URL or log in through student portal.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // 3. Prepare Dynamic Student Voucher Data
+            let sName = student.fullName || student.name || "Student Name";
+            let fName = student.fatherName || "Father Name";
+            let cnic = student.cnic || "35201-XXXXXXX-X";
+            let cls = student.class || "Class 10";
+            let pendingAmt = parseFloat(student.pendingDue || 5000);
+            let lateFee = 200;
+            let totalLate = pendingAmt + lateFee;
+
+            const today = new Date();
+            const dateStr = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+            const voucherNo = `VCH-${targetAdm.replace(/[^0-9]/g, '').slice(-4) || '1002'}`;
+
+            const container = document.getElementById('challanContainer');
+            container.innerHTML = '';
+
+            slipTypes.forEach((copyName) => {
+                container.innerHTML += `
+                    <div class="challan-slip">
+                        <div class="slip-header">
+                            <h4>${FIXED_BANK_INFO.schoolName}</h4>
+                            <div class="slip-sub-title">BANK CREDIT VOUCHER</div>
+                        </div>
+
+                        <!-- Fixed Bank Details -->
+                        <div class="bank-info-box">
+                            <div>Bank: <strong>${FIXED_BANK_INFO.bankName}</strong></div>
+                            <div>Account Title: <strong>${FIXED_BANK_INFO.accTitle}</strong></div>
+                            <div>A/C IBAN: <span class="acc-number-underline">${FIXED_BANK_INFO.accIban}</span></div>
+                        </div>
+
+                        <!-- DYNAMIC STUDENT DATA -->
+                        <table class="meta-table">
+                            <tr><td class="label-td">Voucher #:</td><td class="val-td">${voucherNo}</td></tr>
+                            <tr><td class="label-td">Issue Date:</td><td class="val-td">${dateStr}</td></tr>
+                            <tr><td class="label-td">Due Date:</td><td class="val-td" style="color:#b91c1c;">10-Nov-2026</td></tr>
+                            <tr><td class="label-td">Name:</td><td class="val-td">${sName}</td></tr>
+                            <tr><td class="label-td">CNIC/B-Form:</td><td class="val-td">${cnic}</td></tr>
+                            <tr><td class="label-td">F-Name:</td><td class="val-td">${fName}</td></tr>
+                            <tr><td class="label-td">Class:</td><td class="val-td">${cls}</td></tr>
+                            <tr><td class="label-td">Session:</td><td class="val-td">2026-2027</td></tr>
+                        </table>
+
+                        <table class="fee-table">
+                            <thead><tr><th>Fee Particulars</th><th style="text-align:right;">Amount (Rs.)</th></tr></thead>
+                            <tbody>
+                                <tr><td>Pending / Term Dues</td><td style="text-align:right;">${pendingAmt.toLocaleString()}/-</td></tr>
+                                <tr><td>Late Fee Surcharge</td><td style="text-align:right;">0/-</td></tr>
+                                <tr class="total-row">
+                                    <td>Total (Within Due):</td><td style="text-align:right;">Rs. ${pendingAmt.toLocaleString()}/-</td>
+                                </tr>
+                                <tr style="font-size:7.5px; color:#b91c1c;">
+                                    <td>Total (After Due):</td><td style="text-align:right;">Rs. ${totalLate.toLocaleString()}/-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Fixed Digital Payment Details -->
+                        <div class="digital-acc-box">
+                            <strong>Easypaisa / JazzCash:</strong> ${FIXED_BANK_INFO.easypaisaJazzCash}
+                        </div>
+
+                        <div class="sign-row">
+                            <div class="sign-cell">Issued by</div>
+                            <div class="sign-cell">Checked by</div>
+                            <div class="sign-cell">Bank / Cashier</div>
+                        </div>
+
+                        <div class="copy-type-banner">${copyName}</div>
+                    </div>
+                `;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initRealtimeChallan);
+    </script>
+</body>
+</html>

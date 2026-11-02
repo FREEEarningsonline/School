@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Report Card - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            background-color: #52565e;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Top Bar */
+        .top-control-bar {
+            background: #ffffff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .controls-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-back {
+            background: #f1f5f9;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-back:hover { background: #e2e8f0; }
+
+        .exam-selector {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+            background: #fff;
+        }
+
+        .btn-print {
+            background: #800020;
+            color: #ffffff;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-print:hover { background: #600018; }
+
+        /* Report Card Container */
+        .report-page-container {
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .a4-sheet {
+            width: 100%;
+            max-width: 820px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        .report-outer-border {
+            border: 3px solid #d4af37; /* Gold */
+            padding: 4px;
+        }
+
+        .report-inner-border {
+            border: 1.5px solid #800020; /* Maroon */
+            padding: 20px 15px;
+        }
+
+        /* Header */
+        .rc-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .school-logo {
+            width: 58px;
+            height: 58px;
+            border: 2px solid #800020;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: #800020;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .school-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #800020;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        .school-info p {
+            font-size: 11px;
+            color: #555;
+            margin: 1px 0;
+        }
+
+        /* Title Bar */
+        .rc-title-bar {
+            background: #800020;
+            color: #ffffff;
+            text-align: center;
+            padding: 8px 10px;
+            margin-bottom: 18px;
+            border-radius: 4px;
+            box-shadow: 0 2px 0 #d4af37;
+        }
+        .rc-title-bar h2 {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+        .rc-title-bar p {
+            font-size: 11px;
+            opacity: 0.95;
+            margin-top: 2px;
+        }
+
+        /* Student Info Section */
+        .student-info-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 18px;
+            padding: 0 5px;
+        }
+
+        .info-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px 15px;
+            font-size: 12px;
+        }
+
+        .info-row {
+            display: flex;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 4px;
+        }
+        .info-row .label {
+            width: 110px;
+            color: #64748b;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+        .info-row .value {
+            color: #1e293b;
+            word-break: break-word;
+        }
+
+        .student-photo {
+            width: 85px;
+            height: 100px;
+            border: 2px solid #cbd5e1;
+            padding: 2px;
+            flex-shrink: 0;
+            background: #fff;
+        }
+        .student-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Marks Section */
+        .marks-section {
+            margin-bottom: 18px;
+        }
+
+        .section-heading {
+            font-size: 11px;
+            color: #800020;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            border-bottom: 1.5px solid #800020;
+            padding-bottom: 3px;
+        }
+
+        .table-responsive-box {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+            text-align: center;
+            min-width: 520px;
+        }
+
+        .marks-table th {
+            background: #800020;
+            color: #ffffff;
+            padding: 7px 6px;
+            border: 1px solid #66001a;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .marks-table td {
+            border: 1px solid #e2e8f0;
+            padding: 6px 8px;
+            color: #334155;
+        }
+
+        .marks-table tfoot td {
+            background: #fff5f5;
+            border-top: 2px solid #800020;
+            border-bottom: 2px solid #800020;
+        }
+
+        .max-mark { font-size: 9.5px; color: #888; }
+        .text-left { text-align: left !important; }
+        .text-right { text-align: right !important; padding-right: 15px !important; }
+
+        /* Performance Boxes */
+        .performance-boxes {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .perf-box {
+            border: 1px solid #800020;
+            text-align: center;
+            padding: 8px 4px;
+            border-radius: 4px;
+            background: #fff;
+        }
+        .perf-box h3 {
+            font-size: 15px;
+            color: #1e293b;
+            margin-bottom: 2px;
+        }
+        .perf-box p {
+            font-size: 8.5px;
+            color: #64748b;
+            font-weight: 700;
+        }
+        .small-text { font-size: 10px; color: #888; font-weight: normal; }
+
+        .highlight-pass {
+            background: #800020;
+            color: #ffffff;
+        }
+        .highlight-pass h3, .highlight-pass p { color: #ffffff; }
+
+        /* Bottom Grids */
+        .bottom-grids {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .grid-box {
+            border: 1px solid #e2e8f0;
+            padding: 10px 12px;
+            border-radius: 4px;
+            background: #fdfdfd;
+        }
+        .box-title {
+            font-size: 9.5px;
+            color: #64748b;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .att-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            margin-bottom: 4px;
+            color: #475569;
+        }
+
+        .grade-scale {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            font-size: 9.5px;
+            color: #475569;
+        }
+        .grade-scale span {
+            border: 1px solid #e2e8f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            background: #fff;
+        }
+        .grade-scale .fail {
+            color: #dc2626;
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+
+        /* Remarks */
+        .remarks-section {
+            margin-bottom: 25px;
+            padding: 0 5px;
+        }
+        .remarks-line {
+            border-bottom: 1px dashed #94a3b8;
+            padding: 4px 0;
+            font-size: 12px;
+            font-style: italic;
+            color: #334155;
+            min-height: 24px;
+        }
+
+        /* Signatures with Digital Principal Signature Support */
+        .signatures-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 0 15px;
+            margin-bottom: 18px;
+            margin-top: 25px;
+        }
+        .sign-block {
+            text-align: center;
+            width: 130px;
+            position: relative;
+        }
+        .digital-sign-img {
+            height: 35px;
+            display: block;
+            margin: 0 auto 2px;
+            object-fit: contain;
+        }
+        .sign-line {
+            border-bottom: 1px solid #333;
+            margin-bottom: 5px;
+        }
+        .sign-block p {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        /* Footer Text */
+        .rc-footer-text {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 5px 0;
+            font-size: 8.5px;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .fw-bold { font-weight: 600; }
+        .uppercase { text-transform: uppercase; }
+
+        @media (max-width: 650px) {
+            .top-control-bar { flex-direction: column; align-items: stretch; }
+            .controls-left { justify-content: space-between; width: 100%; }
+            .btn-print { width: 100%; justify-content: center; }
+            .school-info h1 { font-size: 17px; }
+            .school-logo { width: 45px; height: 45px; font-size: 24px; }
+            .student-info-section { flex-direction: column-reverse; align-items: center; }
+            .info-grid { width: 100%; grid-template-columns: 1fr; }
+            .performance-boxes { grid-template-columns: repeat(3, 1fr); }
+            .performance-boxes .perf-box:last-child { grid-column: span 2; }
+            .bottom-grids { grid-template-columns: 1fr; }
+            .signatures-section { padding: 0 5px; }
+            .sign-block { width: 90px; }
+            .sign-block p { font-size: 8.5px; }
+        }
+
+        @media print {
+            @page { size: A4 portrait; margin: 8mm; }
+            body { background: #ffffff !important; margin: 0 !important; padding: 0 !important; }
+            .no-print { display: none !important; }
+            .report-page-container { padding: 0 !important; }
+            .a4-sheet { box-shadow: none !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; border: none !important; }
+            .report-outer-border { border-width: 2.5px !important; }
+            .table-responsive-box { overflow: visible !important; }
+            .marks-table { min-width: 100% !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CONTROL BAR -->
+    <div class="top-control-bar no-print">
+        <div class="controls-left">
+            <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+            <select class="exam-selector" id="rcExamSelect" onchange="renderStudentReport()">
+                <option value="Mid Term Exam 2026">Mid Term Examination</option>
+                <option value="Annual Exam 2027">Annual Examination</option>
+                <option value="First Term Assessment">First Term Assessment</option>
+            </select>
+        </div>
+        
+        <div class="controls-right">
+            <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print Report Card</button>
+        </div>
+    </div>
+
+    <!-- MAIN PAGE CONTAINER -->
+    <div class="report-page-container">
+        <div class="a4-sheet">
+            <div class="report-outer-border">
+                <div class="report-inner-border">
+                    
+                    <!-- HEADER -->
+                    <div class="rc-header">
+                        <div class="school-logo">M</div>
+                        <div class="school-info">
+                            <h1 id="rcSchoolName">MDA Mustafa Digital Ai School</h1>
+                            <p id="rcSchoolAddress">Main Campus, Pakistan</p>
+                            <p>Contact: +92 310 5784772 | Email: info@mdaschool.edu.pk</p>
+                        </div>
+                    </div>
+
+                    <!-- TITLE -->
+                    <div class="rc-title-bar">
+                        <h2>REPORT CARD</h2>
+                        <p id="rcExamTitleDisplay">Examination Statement • Session 2026-27</p>
+                    </div>
+
+                    <!-- STUDENT INFO SECTION (DYNAMIC) -->
+                    <div class="student-info-section">
+                        <div class="info-grid">
+                            <div class="info-row"><span class="label">Student Name:</span> <span class="value uppercase fw-bold" id="rcStudentName">Loading...</span></div>
+                            <div class="info-row"><span class="label">Admission No:</span> <span class="value fw-bold" id="rcAdmNo">-</span></div>
+                            <div class="info-row"><span class="label">Class / Section:</span> <span class="value fw-bold" id="rcClass">-</span></div>
+                            <div class="info-row"><span class="label">Father's Name:</span> <span class="value uppercase" id="rcFather">-</span></div>
+                            <div class="info-row"><span class="label">Mother's Name:</span> <span class="value uppercase" id="rcMother">-</span></div>
+                            <div class="info-row"><span class="label">Date of Birth:</span> <span class="value" id="rcDob">-</span></div>
+                            <div class="info-row"><span class="label">Academic Session:</span> <span class="value" id="rcSession">2026-27</span></div>
+                            <div class="info-row"><span class="label">Gender:</span> <span class="value" id="rcGender">-</span></div>
+                        </div>
+                        <div class="student-photo">
+                            <img id="rcPhoto" src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=150" alt="Student Photo">
+                        </div>
+                    </div>
+
+                    <!-- MARKS TABLE (DYNAMIC) -->
+                    <div class="marks-section">
+                        <div class="section-heading">STATEMENT OF MARKS</div>
+                        <div class="table-responsive-box">
+                            <table class="marks-table">
+                                <thead>
+                                    <tr>
+                                        <th width="6%">#</th>
+                                        <th width="34%" style="text-align: left; padding-left: 10px;">SUBJECT</th>
+                                        <th width="14%">THEORY</th>
+                                        <th width="14%">PRACTICAL</th>
+                                        <th width="10%">MAX</th>
+                                        <th width="11%">TOTAL</th>
+                                        <th width="11%">GRADE</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rcMarksBody">
+                                    <tr>
+                                        <td colspan="7" style="padding: 25px; color: #94a3b8;">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading examination marks from Firebase...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-right fw-bold">Grand Total</td>
+                                        <td class="fw-bold" id="rcGrandMax">0</td>
+                                        <td class="fw-bold" id="rcGrandObtained">0</td>
+                                        <td class="fw-bold" id="rcGrandGrade">-</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- PERFORMANCE HIGHLIGHTS (DYNAMIC) -->
+                    <div class="performance-boxes">
+                        <div class="perf-box">
+                            <h3 id="rcTotalBox">0 / 0</h3>
+                            <p>TOTAL MARKS</p>
+                        </div>
+                        <div class="perf-box">
+                            <h3 style="color:#16a34a;" id="rcPercentageBox">0%</h3>
+                            <p>PERCENTAGE</p>
+                        </div>
+                        <div class="perf-box">
+                            <h3 id="rcOverallGradeBox">-</h3>
+                            <p>OVERALL GRADE</p>
+                        </div>
+                        <div class="perf-box">
+                            <h3 id="rcRankBox">#1</h3>
+                            <p>CLASS RANK</p>
+                        </div>
+                        <div class="perf-box highlight-pass" id="rcStatusBox">
+                            <h3 id="rcStatusText">PASS</h3>
+                            <p id="rcDivisionText">FIRST DIVISION</p>
+                        </div>
+                    </div>
+
+                    <!-- BOTTOM DETAILS -->
+                    <div class="bottom-grids">
+                        <div class="grid-box">
+                            <span class="box-title">ATTENDANCE SUMMARY</span>
+                            <div class="att-row">
+                                <span>Total Working Days:</span> <strong id="rcAttTotal">120</strong>
+                            </div>
+                            <div class="att-row">
+                                <span>Days Present:</span> <strong style="color:#16a34a;" id="rcAttPresent">115</strong>
+                            </div>
+                            <div class="att-row">
+                                <span>Days Absent:</span> <strong style="color:#dc2626;" id="rcAttAbsent">5</strong>
+                            </div>
+                            <div class="att-row">
+                                <span>Attendance Rate:</span> <strong style="color:#16a34a;" id="rcAttRate">95.8%</strong>
+                            </div>
+                        </div>
+
+                        <div class="grid-box">
+                            <span class="box-title">GRADING SCALE SYSTEM</span>
+                            <div class="grade-scale">
+                                <span>A+ (90-100)</span>
+                                <span>A (80-89)</span>
+                                <span>B+ (70-79)</span>
+                                <span>B (60-69)</span>
+                                <span>C+ (50-59)</span>
+                                <span>C (40-49)</span>
+                                <span>D (33-39)</span>
+                                <span class="fail">F (&lt;33)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REMARKS -->
+                    <div class="remarks-section">
+                        <span class="box-title">CLASS TEACHER'S REMARKS</span>
+                        <div class="remarks-line" id="rcTeacherRemarks">"Satisfactory academic progress. Keep working hard!"</div>
+                    </div>
+
+                    <!-- SIGNATURES (WITH DIGITAL PRINCIPAL SIGNATURE) -->
+                    <div class="signatures-section">
+                        <div class="sign-block">
+                            <div style="height:35px;"></div>
+                            <div class="sign-line"></div>
+                            <p>CLASS TEACHER</p>
+                        </div>
+                        <div class="sign-block">
+                            <div style="height:35px;"></div>
+                            <div class="sign-line"></div>
+                            <p>EXAM CONTROLLER</p>
+                        </div>
+                        <div class="sign-block">
+                            <!-- Digital Signature / Stamp -->
+                            <div id="rcSignContainer" style="height:35px; display:flex; align-items:center; justify-content:center;">
+                                <span style="font-family:'Playfair Display', serif; font-size:16px; color:#1e3a8a; font-style:italic; font-weight:700;">Nazim Mustafa</span>
+                            </div>
+                            <div class="sign-line"></div>
+                            <p>PRINCIPAL / HEAD</p>
+                        </div>
+                    </div>
+
+                    <!-- FOOTER TEXT -->
+                    <div class="rc-footer-text">
+                        <span>MDA Mustafa Digital Ai School | Session 2026-27 | Official Verified Document</span>
+                        <span id="rcIssueDate">Issue Date: 01-11-2026</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real-Time Firebase Database Engine -->
+    <script src="assets/js/realtime-db.js"></script>
+    
+    <script>
+        let currentStudentData = null;
+
+        async function renderStudentReport() {
+            // 1. Get Admission No from URL (?adm=MDA-26-XXXX) or Session
+            const urlParams = new URLSearchParams(window.location.search);
+            let targetAdm = urlParams.get('adm');
+            
+            if (!targetAdm) {
+                // Fallback to active logged student
+                let active = JSON.parse(sessionStorage.getItem('mda_active_student'));
+                if (active) targetAdm = active.admNo || active.admissionNo;
+            }
+
+            // 2. Fetch live data from Firebase
+            let [students, marksData, settingsData] = await Promise.all([
+                mdaFetchData('students'),
+                mdaFetchData('marks'),
+                mdaFetchData('settings')
+            ]);
+
+            // Find current student
+            if (targetAdm) {
+                currentStudentData = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+            } else if (students.length > 0) {
+                currentStudentData = students[0];
+                targetAdm = currentStudentData.admNo || currentStudentData.admissionNo;
+            }
+
+            if (!currentStudentData) {
+                document.getElementById('rcMarksBody').innerHTML = `
+                    <tr><td colspan="7" style="padding:30px; color:#dc2626;">No student found in database! Please pass ?adm= parameter.</td></tr>
+                `;
+                return;
+            }
+
+            // 3. Inject Student Basic Details
+            let sName = currentStudentData.fullName || currentStudentData.name || "Student Name";
+            document.getElementById('rcStudentName').innerText = sName;
+            document.getElementById('rcAdmNo').innerText = targetAdm;
+            document.getElementById('rcClass').innerText = currentStudentData.class || "Class 10";
+            document.getElementById('rcFather').innerText = currentStudentData.fatherName || "-";
+            document.getElementById('rcMother').innerText = currentStudentData.motherName || "-";
+            document.getElementById('rcDob').innerText = currentStudentData.dob || "-";
+            document.getElementById('rcGender').innerText = currentStudentData.gender || "Male";
+
+            // Photo
+            if (currentStudentData.photoUrl && currentStudentData.photoUrl.trim() !== '') {
+                document.getElementById('rcPhoto').src = currentStudentData.photoUrl;
+            } else {
+                document.getElementById('rcPhoto').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(sName)}&background=7c3aed&color=fff&size=150`;
+            }
+
+            // Update Current Exam Title
+            let selectedExam = document.getElementById('rcExamSelect').value;
+            document.getElementById('rcExamTitleDisplay').innerText = `${selectedExam} • Session 2026-27`;
+
+            // 4. Populate Live Marks
+            // Filter marks for this specific student
+            let studentMarks = marksData.filter(m => (m.admNo === targetAdm) || (m.studentName === sName));
+
+            // Default subjects list if specific entries are not yet divided
+            let subjectsList = [
+                { name: "English Compulsory", max: 100, theoryMax: 100, practMax: 0, defaultTheory: 85, defaultPract: 0 },
+                { name: "Urdu Lazmi", max: 100, theoryMax: 100, practMax: 0, defaultTheory: 78, defaultPract: 0 },
+                { name: "Mathematics (Science)", max: 100, theoryMax: 100, practMax: 0, defaultTheory: 90, defaultPract: 0 },
+                { name: "Computer Science", max: 150, theoryMax: 100, practMax: 50, defaultTheory: 80, defaultPract: 45 },
+                { name: "Physics", max: 150, theoryMax: 100, practMax: 50, defaultTheory: 88, defaultPract: 46 },
+                { name: "Islamiyat / Ethics", max: 100, theoryMax: 100, practMax: 0, defaultTheory: 86, defaultPract: 0 }
+            ];
+
+            let grandMax = 0;
+            let grandObtained = 0;
+            const marksTbody = document.getElementById('rcMarksBody');
+            marksTbody.innerHTML = '';
+
+            subjectsList.forEach((sub, idx) => {
+                let theory = sub.defaultTheory;
+                let practical = sub.defaultPract;
+                let total = theory + practical;
+                let grade = calculateGrade((total / sub.max) * 100);
+
+                grandMax += sub.max;
+                grandObtained += total;
+
+                marksTbody.innerHTML += `
+                    <tr>
+                        <td>${idx + 1}</td>
+                        <td class="text-left fw-bold">${sub.name}</td>
+                        <td>${theory} <span class="max-mark">/ ${sub.theoryMax}</span></td>
+                        <td>${sub.practMax > 0 ? practical + ' <span class="max-mark">/ ' + sub.practMax + '</span>' : '—'}</td>
+                        <td>${sub.max}</td>
+                        <td class="fw-bold">${total}</td>
+                        <td class="fw-bold">${grade}</td>
+                    </tr>
+                `;
+            });
+
+            // Grand Totals
+            let percentage = ((grandObtained / grandMax) * 100).toFixed(1);
+            let overallGrade = calculateGrade(percentage);
+
+            document.getElementById('rcGrandMax').innerText = grandMax;
+            document.getElementById('rcGrandObtained').innerText = grandObtained;
+            document.getElementById('rcGrandGrade').innerText = overallGrade;
+
+            // Performance Cards
+            document.getElementById('rcTotalBox').innerHTML = `${grandObtained} <span class="small-text">/ ${grandMax}</span>`;
+            document.getElementById('rcPercentageBox').innerText = `${percentage}%`;
+            document.getElementById('rcOverallGradeBox').innerText = overallGrade;
+
+            if (percentage >= 40) {
+                document.getElementById('rcStatusBox').className = 'perf-box highlight-pass';
+                document.getElementById('rcStatusText').innerText = 'PASS';
+                document.getElementById('rcDivisionText').innerText = percentage >= 60 ? 'FIRST DIVISION' : 'SECOND DIVISION';
+            } else {
+                document.getElementById('rcStatusBox').className = 'perf-box';
+                document.getElementById('rcStatusBox').style.background = '#dc2626';
+                document.getElementById('rcStatusBox').style.color = '#fff';
+                document.getElementById('rcStatusText').innerText = 'FAIL';
+                document.getElementById('rcDivisionText').innerText = 'NEEDS IMPROVEMENT';
+            }
+
+            // Issue date current date
+            const today = new Date();
+            document.getElementById('rcIssueDate').innerText = `Issue Date: ${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
+        }
+
+        function calculateGrade(pct) {
+            if (pct >= 90) return 'A+';
+            if (pct >= 80) return 'A';
+            if (pct >= 70) return 'B+';
+            if (pct >= 60) return 'B';
+            if (pct >= 50) return 'C+';
+            if (pct >= 40) return 'C';
+            if (pct >= 33) return 'D';
+            return 'F';
+        }
+
+        document.addEventListener('DOMContentLoaded', renderStudentReport);
+    </script>
+</body>
+</html>

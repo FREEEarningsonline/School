@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks & Course Evaluation Entry - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Modules CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+
+    <style>
+        .role-access-banner {
+            background: #f8fafc;
+            border-left: 4px solid #7c3aed;
+            padding: 12px 18px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .role-access-banner strong { font-size: 13px; color: #1e1e2d; }
+        .role-access-banner span { font-size: 11.5px; color: #64748b; }
+
+        .marks-grid-table { width: 100%; border-collapse: collapse; min-width: 850px; }
+        .marks-grid-table th { text-align: center; padding: 10px; font-size: 11px; border: 1px solid rgba(255,255,255,0.15); }
+        .th-subject-header { background: #6b21a8; color: #fff; font-weight: 600; }
+        .th-sub-header { background: #581c87; color: #f3e8ff; font-size: 10.5px; }
+        .marks-grid-table td { padding: 8px 10px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px; }
+        
+        .mark-input {
+            width: 70px;
+            padding: 7px;
+            text-align: center;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            outline: none;
+            background: #fff;
+            transition: 0.2s;
+        }
+        .mark-input:focus {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+        }
+
+        .grade-badge-table { padding: 3px 10px; border-radius: 4px; font-weight: 700; font-size: 11px; }
+        .grade-pass { background: #dcfce7; color: #15803d; }
+        .grade-fail { background: #fee2e2; color: #b91c1c; }
+
+        .lock-indicator {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar" id="sidebarAvatar">A</div>
+            <div class="user-details">
+                <h5 id="sidebarUserName">Administrator</h5>
+                <span id="sidebarUserRole"><i class="fas fa-shield-alt"></i> Control Panel</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html" class="active"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Marks & Course Evaluation Register</h2>
+            </div>
+            <div class="header-right">
+                <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar">
+                <p class="breadcrumb">Grade students for School Classes (1 to 10) and Digital AI Skill Courses live in database</p>
+            </div>
+
+            <!-- ROLE & SECURITY ACCESS BANNER -->
+            <div class="role-access-banner" id="accessBanner">
+                <div>
+                    <strong id="loggedUserDisplay"><i class="fas fa-user-shield text-primary"></i> Master Administrator Mode</strong>
+                    <span id="accessSubText" style="display:block;">Full access to evaluate all classes, digital courses, and subjects.</span>
+                </div>
+                <div id="teacherLockTag" style="display:none;">
+                    <span class="lock-indicator"><i class="fas fa-lock"></i> Teacher Subject Lock Active</span>
+                </div>
+            </div>
+
+            <!-- FILTER SECTION (HYBRID: CLASSES 1-10 + MANUAL DIGITAL COURSES) -->
+            <div class="filter-section">
+                <div class="filter-grid" style="align-items: flex-end;">
+                    
+                    <!-- Examination / Evaluation Term -->
+                    <div class="filter-group">
+                        <label>EXAMINATION / EVALUATION TERM *</label>
+                        <select id="examSelect">
+                            <option value="Mid Term Exam 2026">Mid Term Exam 2026</option>
+                            <option value="Annual Exam 2027">Annual Exam 2027</option>
+                            <option value="Final Project Evaluation">Final Project / Course Evaluation</option>
+                            <option value="Monthly Assessment">Monthly Test</option>
+                        </select>
+                    </div>
+
+                    <!-- HYBRID CLASS OR MANUAL DIGITAL COURSE INPUT -->
+                    <div class="filter-group">
+                        <label>CLASS OR DIGITAL COURSE (TYPE OR SELECT) *</label>
+                        <input list="classCourseOptions" id="marksClassCourse" placeholder="Select Class or Type Course..." required autocomplete="off">
+                        
+                        <!-- DATALIST: Classes 1 to 10 + Digital Courses (Plus user can type ANYTHING manual) -->
+                        <datalist id="classCourseOptions">
+                            <option value="Class 10">Class 10 (Matric)</option>
+                            <option value="Class 9">Class 9</option>
+                            <option value="Class 8">Class 8</option>
+                            <option value="Class 7">Class 7</option>
+                            <option value="Class 6">Class 6</option>
+                            <option value="Class 5">Class 5</option>
+                            <option value="Class 4">Class 4</option>
+                            <option value="Class 3">Class 3</option>
+                            <option value="Class 2">Class 2</option>
+                            <option value="Class 1">Class 1</option>
+                            <!-- Digital AI Courses Presets -->
+                            <option value="Artificial Intelligence & Prompt Engineering">AI & Prompt Engineering</option>
+                            <option value="Full Stack Web & App Development">Web & App Development</option>
+                            <option value="Graphic Design & Video Editing (3 Months)">Graphic Design & Video Editing</option>
+                            <option value="Python Programming & Data Science">Python & Data Science</option>
+                            <option value="Diploma in Computer Application (DCA)">Diploma in Computer Application</option>
+                        </datalist>
+                    </div>
+
+                    <!-- SUBJECT OR COURSE MODULE (MANUAL OR SELECT) -->
+                    <div class="filter-group">
+                        <label>SUBJECT / MODULE NAME *</label>
+                        <input list="subjectModuleOptions" id="marksSubject" placeholder="e.g. Computer Science / AI Project" required autocomplete="off">
+                        
+                        <datalist id="subjectModuleOptions">
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="English Compulsory">English Compulsory</option>
+                            <option value="Urdu Lazmi">Urdu Lazmi</option>
+                            <option value="Islamiyat / Ethics">Islamiyat / Ethics</option>
+                            <!-- Course Modules -->
+                            <option value="Practical Project / Portfolio">Practical Project / Portfolio</option>
+                            <option value="Lab Task & Assignments">Lab Task & Assignments</option>
+                            <option value="Final Viva & Presentation">Final Viva & Presentation</option>
+                        </datalist>
+                    </div>
+
+                    <div class="filter-group button-group">
+                        <button class="btn-search" onclick="loadLiveEvaluationSheet()"><i class="fas fa-sync-alt"></i> Load Student Sheet</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- MARKS & EVALUATION TABLE -->
+            <div class="data-table-card mt-20">
+                <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <h4 id="sheetTitleDisplay"><i class="fas fa-pen text-primary"></i> Examination & Course Marks Register</h4>
+                        <span style="font-size: 11px; color: #64748b;" id="sheetSubtitleDisplay">Select criteria above and click Load Sheet</span>
+                    </div>
+                    <div>
+                        <button class="btn-export" style="background:#16a34a;" onclick="saveSubjectMarksLive()"><i class="fas fa-save"></i> Save All Marks to Firebase</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="marks-grid-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" style="background:#581c87; color:#fff;" width="5%">#</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff; text-align:left;" width="25%">STUDENT (ROLL / ADM NO)</th>
+                                <th class="th-subject-header" colspan="2" id="thSubjectTitle">SUBJECT EVALUATION</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff;" width="12%">TOTAL (OUT OF 100)</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff;" width="10%">%</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff;" width="10%">GRADE</th>
+                            </tr>
+                            <tr>
+                                <th class="th-sub-header">THEORY / ASSIGNMENT (MAX: 50)</th>
+                                <th class="th-sub-header">PRACTICAL / PROJECT (MAX: 50)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="evaluationTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    <i class="fas fa-clipboard-list fa-2x" style="margin-bottom:8px; display:block;"></i>
+                                    Choose Class (1 to 10) or type any Digital Course name above, then click "Load Student Sheet".
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="padding: 15px 20px; background: #fafafa; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <small style="color: #64748b;"><i class="fas fa-info-circle text-primary"></i> Empty mark cell defaults to 0. Passing threshold: 40%.</small>
+                    <button class="btn-submit" style="background:#7239ea; padding: 10px 25px;" onclick="saveSubjectMarksLive()"><i class="fas fa-check-circle"></i> Commit Marks to Database</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global JS & Real-Time Engine -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
+
+    <script>
+        let loadedStudentsList = [];
+        let loggedInTeacher = null;
+        let isMasterAdmin = false;
+
+        // 1. INITIALIZE & CHECK ROLE PERMISSIONS (TEACHER VS ADMIN)
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check session
+            const teacherSession = sessionStorage.getItem('mda_active_teacher');
+            const adminSession = sessionStorage.getItem('isMDAAdmin');
+
+            if (teacherSession) {
+                // TEACHER MODE ACTIVE
+                loggedInTeacher = JSON.parse(teacherSession);
+                let tName = loggedInTeacher.fullName || loggedInTeacher.name;
+
+                // Update UI Header
+                document.getElementById('sidebarUserName').innerText = tName;
+                document.getElementById('sidebarUserRole').innerText = `Teacher: ${loggedInTeacher.department || 'Faculty'}`;
+                document.getElementById('sidebarAvatar').innerText = 'T';
+
+                document.getElementById('loggedUserDisplay').innerHTML = `<i class="fas fa-chalkboard-teacher text-purple"></i> Faculty Grading Mode: ${tName}`;
+                document.getElementById('accessSubText').innerText = `Restricted access: You can only grade students for your assigned classes, courses, and subjects.`;
+                document.getElementById('teacherLockTag').style.display = 'block';
+
+                // Fetch live mappings to see what this teacher teaches
+                let mappings = await mdaFetchData('mappings');
+                let myMappings = mappings.filter(m => (m.teacher || '').trim().toLowerCase() === tName.toLowerCase());
+
+                if (myMappings.length > 0) {
+                    // Pre-fill and lock inputs to teacher's primary assignment
+                    document.getElementById('marksClassCourse').value = myMappings[0].class || 'Class 10';
+                    document.getElementById('marksSubject').value = myMappings[0].subject || 'Computer Science';
+                    
+                    // Populate datalist with only teacher's allowed mappings
+                    const cList = document.getElementById('classCourseOptions');
+                    const sList = document.getElementById('subjectModuleOptions');
+                    cList.innerHTML = '';
+                    sList.innerHTML = '';
+
+                    myMappings.forEach(map => {
+                        cList.innerHTML += `<option value="${map.class}">${map.class}</option>`;
+                        sList.innerHTML += `<option value="${map.subject}">${map.subject}</option>`;
+                    });
+                }
+            } else {
+                // ADMIN MODE
+                isMasterAdmin = true;
+            }
+        });
+
+        // 2. LOAD LIVE STUDENTS FOR CLASS OR MANUAL DIGITAL COURSE
+        async function loadLiveEvaluationSheet() {
+            const selectedClassCourse = document.getElementById('marksClassCourse').value.trim();
+            const selectedSubject = document.getElementById('marksSubject').value.trim();
+            const selectedExam = document.getElementById('examSelect').value;
+
+            if (!selectedClassCourse || !selectedSubject) {
+                alert("Please select or type both Class/Course and Subject/Module!");
+                return;
+            }
+
+            // TEACHER SECURITY ENFORCEMENT CHECK
+            if (loggedInTeacher && !isMasterAdmin) {
+                let tName = loggedInTeacher.fullName || loggedInTeacher.name;
+                let mappings = await mdaFetchData('mappings');
+                let hasPermission = mappings.some(m => 
+                    (m.teacher || '').trim().toLowerCase() === tName.toLowerCase() &&
+                    (m.class || '').trim().toLowerCase() === selectedClassCourse.toLowerCase() &&
+                    (m.subject || '').trim().toLowerCase() === selectedSubject.toLowerCase()
+                );
+
+                // Allow if mappings list is empty (flexible mode) or explicitly matched
+                if (mappings.length > 0 && !hasPermission) {
+                    alert(`🔒 Access Restricted!\n\nDear ${tName}, you are not assigned to grade "${selectedSubject}" for "${selectedClassCourse}".\nYou can only grade your own assigned subjects.`);
+                    return;
+                }
+            }
+
+            // Update UI Headings
+            document.getElementById('sheetTitleDisplay').innerHTML = `<i class="fas fa-pen text-primary"></i> ${selectedClassCourse} — ${selectedSubject}`;
+            document.getElementById('sheetSubtitleDisplay').innerText = `Exam Term: ${selectedExam} • Live Evaluation`;
+            document.getElementById('thSubjectTitle').innerText = `${selectedSubject.toUpperCase()} (EVALUATION)`;
+
+            // Fetch live students and existing marks
+            const [allStudents, allMarks] = await Promise.all([
+                mdaFetchData('students'),
+                mdaFetchData('marks')
+            ]);
+
+            // Filter students by selected Class or Digital Course
+            loadedStudentsList = allStudents.filter(st => (st.class || '').trim().toLowerCase() === selectedClassCourse.toLowerCase());
+
+            const tbody = document.getElementById('evaluationTableBody');
+
+            if (loadedStudentsList.length > 0) {
+                tbody.innerHTML = '';
+
+                loadedStudentsList.forEach((st, idx) => {
+                    let adm = st.admNo || st.admissionNo || `ST-${idx + 1}`;
+                    let sName = st.fullName || st.name || 'Unnamed';
+
+                    // Check if marks for this specific student, subject and exam already exist in Firebase
+                    let existingRecord = allMarks.find(m => 
+                        (m.admNo === adm || m.studentName === sName) &&
+                        (m.subject || '').toLowerCase() === selectedSubject.toLowerCase() &&
+                        (m.exam || '').toLowerCase() === selectedExam.toLowerCase()
+                    );
+
+                    let initialTheory = existingRecord ? (existingRecord.theoryMarks !== undefined ? existingRecord.theoryMarks : 40) : 40;
+                    let initialPract = existingRecord ? (existingRecord.practicalMarks !== undefined ? existingRecord.practicalMarks : 45) : 45;
+                    let initialTotal = initialTheory + initialPract;
+                    let initialGrade = calculateLiveGrade(initialTotal);
+
+                    tbody.innerHTML += `
+                        <tr id="row_${idx}" data-firebaseid="${existingRecord ? existingRecord.firebaseId : ''}">
+                            <td>${idx + 1}</td>
+                            <td style="text-align: left;">
+                                <strong>${sName}</strong><br>
+                                <span class="adm-badge">${adm}</span>
+                            </td>
+                            <td>
+                                <input type="number" class="mark-input input-theory" value="${initialTheory}" max="50" min="0" oninput="recalcRow(${idx})">
+                            </td>
+                            <td>
+                                <input type="number" class="mark-input input-pract" value="${initialPract}" max="50" min="0" oninput="recalcRow(${idx})">
+                            </td>
+                            <td><strong id="tot_${idx}">${initialTotal}</strong> <span style="font-size:10px; color:#64748b;">/ 100</span></td>
+                            <td><strong id="per_${idx}">${initialTotal}%</strong></td>
+                            <td><span class="grade-badge-table ${initialTotal >= 40 ? 'grade-pass' : 'grade-fail'}" id="grd_${idx}">${initialGrade}</span></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            <i class="fas fa-user-slash fa-2x" style="margin-bottom:8px; display:block;"></i>
+                            No students found enrolled in "${selectedClassCourse}".<br>
+                            Register students in this Class or Course from "New Admission" or "Online Registration".
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // 3. ROW RE-CALCULATION
+        function recalcRow(idx) {
+            const row = document.getElementById(`row_${idx}`);
+            const theory = parseFloat(row.querySelector('.input-theory').value) || 0;
+            const pract = parseFloat(row.querySelector('.input-pract').value) || 0;
+            const total = Math.min(100, theory + pract);
+
+            document.getElementById(`tot_${idx}`).innerText = total;
+            document.getElementById(`per_${idx}`).innerText = `${total}%`;
+
+            const badge = document.getElementById(`grd_${idx}`);
+            const grade = calculateLiveGrade(total);
+            badge.innerText = grade;
+
+            if (total >= 40) {
+                badge.className = 'grade-badge-table grade-pass';
+            } else {
+                badge.className = 'grade-badge-table grade-fail';
+            }
+        }
+
+        function calculateLiveGrade(marks) {
+            if (marks >= 90) return 'A+';
+            if (marks >= 80) return 'A';
+            if (marks >= 70) return 'B';
+            if (marks >= 60) return 'C';
+            if (marks >= 50) return 'D';
+            if (marks >= 40) return 'E';
+            return 'F';
+        }
+
+        // 4. COMMIT & SAVE INDEPENDENT MARKS TO FIREBASE
+        async function saveSubjectMarksLive() {
+            if (loadedStudentsList.length === 0) {
+                alert("No student sheet is loaded to save!");
+                return;
+            }
+
+            const selectedClassCourse = document.getElementById('marksClassCourse').value.trim();
+            const selectedSubject = document.getElementById('marksSubject').value.trim();
+            const selectedExam = document.getElementById('examSelect').value;
+            const teacherName = loggedInTeacher ? (loggedInTeacher.fullName || loggedInTeacher.name) : "Administrator";
+
+            let saveCount = 0;
+
+            for (let idx = 0; idx < loadedStudentsList.length; idx++) {
+                const st = loadedStudentsList[idx];
+                const row = document.getElementById(`row_${idx}`);
+                const theory = parseFloat(row.querySelector('.input-theory').value) || 0;
+                const pract = parseFloat(row.querySelector('.input-pract').value) || 0;
+                const total = theory + pract;
+                const grade = calculateLiveGrade(total);
+                const existingFirebaseId = row.getAttribute('data-firebaseid');
+
+                const markPayload = {
+                    action: 'marks',
+                    admNo: st.admNo || st.admissionNo,
+                    studentName: st.fullName || st.name,
+                    class: selectedClassCourse,
+                    subject: selectedSubject,
+                    exam: selectedExam,
+                    theoryMarks: theory,
+                    practicalMarks: pract,
+                    totalMarks: total,
+                    maxMarks: 100,
+                    grade: grade,
+                    gradedBy: teacherName,
+                    date: new Date().toISOString().slice(0, 10)
+                };
+
+                if (existingFirebaseId && existingFirebaseId !== '') {
+                    // Update existing record
+                    await fetch(`${FIREBASE_DB_URL}/marks/${existingFirebaseId}.json`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(markPayload)
+                    });
+                } else {
+                    // Save new record
+                    await mdaSaveData('marks', markPayload);
+                }
+                saveCount++;
+            }
+
+            alert(`✅ Successfully saved and committed ${saveCount} student mark records for:\nCourse/Class: ${selectedClassCourse}\nSubject: ${selectedSubject}\nTerm: ${selectedExam}`);
+            loadLiveEvaluationSheet(); // Refresh with newly saved data
+        }
+    </script>
+</body>
+</html>

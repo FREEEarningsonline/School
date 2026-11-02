@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Class Result Gazette - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Modules CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+
+    <style>
+        .rank-badge { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+        .rank-1 { background: #fef08a; color: #854d0e; border: 1.5px solid #eab308; }
+        .rank-2 { background: #f1f5f9; color: #334155; border: 1.5px solid #94a3b8; }
+        .rank-3 { background: #ffedd5; color: #9a3412; border: 1.5px solid #f97316; }
+        .rank-general { background: #f8fafc; color: #64748b; border: 1px solid #cbd5e1; }
+        .toppers-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .topper-box { background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        @media print {
+            .sidebar, .top-header, .filter-section, .no-print { display: none !important; }
+            .main-content { margin-left: 0 !important; width: 100% !important; }
+            .dashboard-content { padding: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html" class="active"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header no-print">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Real-Time Class Result Gazette</h2>
+            </div>
+            <div class="header-right">
+                <button class="btn-export" style="background:#475569;" onclick="window.print()"><i class="fas fa-print"></i> Print Gazette</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar no-print">
+                <p class="breadcrumb">Live class merit list and examination results fetched from database</p>
+            </div>
+
+            <!-- FILTER -->
+            <div class="filter-section no-print">
+                <div class="filter-grid" style="align-items: flex-end;">
+                    <div class="filter-group">
+                        <label>SELECT CLASS</label>
+                        <select id="resClass">
+                            <option value="Class 10">Class 10</option>
+                            <option value="Class 9">Class 9</option>
+                        </select>
+                    </div>
+                    <div class="filter-group button-group">
+                        <button class="btn-search" onclick="loadLiveClassResult()"><i class="fas fa-sync-alt"></i> Generate Gazette</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLE CARD -->
+            <div class="data-table-card">
+                <div class="card-header">
+                    <h4><i class="fas fa-award text-primary"></i> Class Merit List Gazette</h4>
+                    <span class="badge" id="resCountBadge">0 students</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="resultTable">
+                        <thead>
+                            <tr>
+                                <th width="8%">RANK</th>
+                                <th width="15%">ADM NO</th>
+                                <th width="32%">STUDENT NAME</th>
+                                <th width="18%">TOTAL MARKS</th>
+                                <th width="12%">GRADE</th>
+                                <th width="15%">STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultTableBody">
+                            <tr>
+                                <td colspan="6" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    Click "Generate Gazette" to load results from Google Database.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global JS & Real-Time Engine -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
+
+    <script>
+        async function loadLiveClassResult() {
+            const cls = document.getElementById('resClass').value;
+            let marksData = await mdaFetchData('marks');
+            
+            // Filter by class if available, else show all
+            let filtered = marksData.filter(m => (m.class || "Class 10").trim() === cls);
+            
+            // Sort by total marks descending
+            filtered.sort((a, b) => parseFloat(b.totalMarks || 0) - parseFloat(a.totalMarks || 0));
+
+            const tbody = document.getElementById('resultTableBody');
+            document.getElementById('resCountBadge').innerText = `${filtered.length} students`;
+
+            if (filtered.length > 0) {
+                tbody.innerHTML = '';
+                filtered.forEach((res, idx) => {
+                    let rankClass = idx === 0 ? 'rank-1' : (idx === 1 ? 'rank-2' : (idx === 2 ? 'rank-3' : 'rank-general'));
+                    let statusBadge = res.grade === 'F' ? '<span class="badge" style="background:#fee2e2; color:#b91c1c;">FAIL</span>' : '<span class="badge" style="background:#dcfce7; color:#15803d;">PASS</span>';
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><span class="rank-badge ${rankClass}">${idx + 1}</span></td>
+                            <td><span class="adm-badge">${res.admNo}</span></td>
+                            <td><strong>${res.studentName}</strong></td>
+                            <td class="fw-bold">${res.totalMarks} <span style="font-size:11px; color:#64748b;">/ 200</span></td>
+                            <td><span class="grade-badge-table ${res.grade === 'F' ? 'grade-fail' : 'grade-pass'}">${res.grade}</span></td>
+                            <td>${statusBadge}</td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No examination results found for ${cls}. Please enter marks first.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

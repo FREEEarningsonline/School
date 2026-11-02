@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Fee Collect - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+
+    <style>
+        .quick-fee-card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; max-width: 800px; margin: 0 auto 30px auto; }
+        .quick-search-box { position: relative; margin-bottom: 25px; }
+        .quick-search-box input { width: 100%; padding: 16px 20px 16px 50px; font-size: 16px; border: 2px solid #7239ea; border-radius: 8px; outline: none; box-shadow: 0 0 0 4px rgba(114, 57, 234, 0.1); }
+        .quick-search-box i { position: absolute; left: 18px; top: 20px; font-size: 20px; color: #7239ea; }
+        .student-quick-preview { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .preset-amount-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .btn-preset { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; color: #334155; transition: 0.2s; }
+        .btn-preset:hover, .btn-preset.active { background: #7239ea; border-color: #7239ea; color: #fff; }
+        .btn-express-pay { background: #16a34a; color: white; border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 600; width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.25); transition: 0.3s; }
+        .btn-express-pay:hover { background: #15803d; }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html" class="active"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Express Quick Fee Counter</h2>
+            </div>
+            <div class="header-right">
+                <span class="session-badge"><i class="fas fa-bolt text-warning"></i> Express Mode</span>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar">
+                <p class="breadcrumb">Instant counter collection with auto-clearing database dues</p>
+            </div>
+
+            <div class="quick-fee-card">
+                
+                <div class="quick-search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="quickAdmSearch" placeholder="Type Admission No (e.g. MDA-26-1055) and press Enter..." onkeyup="searchQuickStudent(event)">
+                </div>
+
+                <div class="student-quick-preview">
+                    <div>
+                        <h4 style="margin: 0; color: #1e293b;" id="qStudentName">Search a Student above</h4>
+                        <p style="margin: 2px 0 0; font-size: 12px; color: #64748b;" id="qStudentMeta">Class - • Father: -</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 11px; color: #dc2626; font-weight: 600;">PENDING DUE</span>
+                        <h3 style="margin: 0; color: #dc2626; font-size: 22px;" id="qStudentDue">Rs. 0</h3>
+                    </div>
+                </div>
+
+                <form id="quickPayForm">
+                    <label style="font-size: 12px; color: #64748b; font-weight: 500; margin-bottom: 8px; display: block;">QUICK PRESET AMOUNTS (PKR):</label>
+                    <div class="preset-amount-buttons">
+                        <button type="button" class="btn-preset" onclick="setQuickAmount(500)">Rs. 500</button>
+                        <button type="button" class="btn-preset" onclick="setQuickAmount(1000)">Rs. 1,000</button>
+                        <button type="button" class="btn-preset" onclick="setQuickAmount(2000)">Rs. 2,000</button>
+                        <button type="button" class="btn-preset" onclick="setQuickAmount(5000)">Rs. 5,000</button>
+                        <button type="button" class="btn-preset active" id="btnFullDue" onclick="setFullDueAmount()">Full Due</button>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; margin-bottom: 25px;">
+                        <div class="input-group">
+                            <label>COLLECTING AMOUNT (Rs.) *</label>
+                            <input type="number" id="quickPayAmount" value="0" style="font-size: 20px; font-weight: 700; color: #16a34a; padding: 12px;" required>
+                        </div>
+                        <div class="input-group">
+                            <label>PAYMENT MODE *</label>
+                            <select id="quickPayMode" style="padding: 14px;" required>
+                                <option value="Cash">Cash (Naqad)</option>
+                                <option value="Easypaisa">Easypaisa</option>
+                                <option value="JazzCash">JazzCash</option>
+                                <option value="Bank Transfer">Bank Transfer / Raast</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btnQuickSubmit" class="btn-express-pay">
+                        <i class="fas fa-print"></i> Collect & Auto-Clear Pending Dues
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global JS & Real-Time Engine -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
+
+    <script>
+        let selectedStudentObj = null;
+
+        async function searchQuickStudent(e) {
+            if (e.key === 'Enter') {
+                let query = document.getElementById('quickAdmSearch').value.toUpperCase().trim();
+                let students = await mdaFetchData('students');
+                
+                selectedStudentObj = students.find(s => (s.admNo || s.admissionNo || "").toUpperCase() === query);
+
+                if (selectedStudentObj) {
+                    let sName = selectedStudentObj.fullName || selectedStudentObj.name;
+                    document.getElementById('qStudentName').innerText = sName;
+                    document.getElementById('qStudentMeta').innerText = `Class ${selectedStudentObj.class} • Father: ${selectedStudentObj.fatherName}`;
+                    
+                    let due = parseFloat(selectedStudentObj.pendingDue || 0);
+                    document.getElementById('qStudentDue').innerText = `Rs. ${due.toLocaleString()}`;
+                    document.getElementById('quickPayAmount').value = due;
+                } else {
+                    alert("Student admission number not found in database!");
+                }
+            }
+        }
+
+        function setQuickAmount(amt) {
+            document.getElementById('quickPayAmount').value = amt;
+            document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function setFullDueAmount() {
+            if (selectedStudentObj) {
+                let due = parseFloat(selectedStudentObj.pendingDue || 0);
+                document.getElementById('quickPayAmount').value = due;
+                document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+                document.getElementById('btnFullDue').classList.add('active');
+            }
+        }
+
+        // ================= QUICK SUBMIT & AUTO-CLEAR PENDING DUES =================
+        document.getElementById('quickPayForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!selectedStudentObj) {
+                alert("Please type Admission Number and press Enter first!");
+                return;
+            }
+
+            const btn = document.getElementById('btnQuickSubmit');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            btn.disabled = true;
+
+            const paidAmt = parseFloat(document.getElementById('quickPayAmount').value) || 0;
+            const rand = Math.floor(1000 + Math.random() * 9000);
+            const rcpNumber = `RCP-Q-${rand}`;
+            const sName = selectedStudentObj.fullName || selectedStudentObj.name;
+            const adm = selectedStudentObj.admNo || selectedStudentObj.admissionNo;
+
+            // 1. Save Transaction
+            const quickPayment = {
+                action: 'fees',
+                receiptNo: rcpNumber,
+                admNo: adm,
+                date: new Date().toISOString().slice(0, 10),
+                studentName: sName,
+                amount: paidAmt,
+                mode: document.getElementById('quickPayMode').value,
+                remarks: 'Express Quick Counter Collect'
+            };
+
+            await mdaSaveData('fees', quickPayment);
+
+            // 2. AUTO-REDUCE / CLEAR PENDING DUE FROM STUDENT RECORD
+            let currentDue = parseFloat(selectedStudentObj.pendingDue || 0);
+            let updatedPendingDue = Math.max(0, currentDue - paidAmt);
+
+            try {
+                if (selectedStudentObj.firebaseId) {
+                    await fetch(`${FIREBASE_DB_URL}/students/${selectedStudentObj.firebaseId}.json`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ pendingDue: updatedPendingDue })
+                    });
+                }
+            } catch (err) {
+                console.error("Auto clear error:", err);
+            }
+
+            alert(`⚡ Quick Payment of Rs. ${paidAmt.toLocaleString()} Collected!\nNew Pending Due: Rs. ${updatedPendingDue.toLocaleString()}\nStudent record updated in database!`);
+            window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+</html>
