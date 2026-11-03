@@ -24,212 +24,259 @@
         }
 
         /* ================= APP TOP BAR ================= */
-        .app-top-header {
-            background: #1e1e2d; /* Dark Blue matching screenshot */
+        .portal-hero-header {
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #6366f1 100%);
             color: #ffffff;
-            padding: 16px 20px;
+            padding: 25px 20px 45px;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+            position: relative;
+        }
+
+        .header-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .app-top-header h3 {
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .bell-icon-wrap {
-            position: relative;
-            cursor: pointer;
-            font-size: 18px;
-            color: #fff;
+            margin-bottom: 12px;
         }
 
-        /* ================= CONTAINER ================= */
-        .portal-container {
-            max-width: 550px;
-            margin: 0 auto;
-            padding: 16px;
-        }
-
-        /* ================= STUDENT PROFILE BANNER (Screenshot Exact) ================= */
-        .student-hero-banner {
-            background: #2b2d42; /* Deep Navy Card Background */
+        .nav-menu-icon {
+            font-size: 20px;
             color: #ffffff;
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            position: relative;
+            cursor: pointer;
         }
-        .hero-inner-flex {
+
+        .header-user-side {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 12px;
         }
-        .student-avatar-box {
-            width: 70px;
-            height: 70px;
+
+        .bell-icon-wrap {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .bell-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: #fff;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            border: 2.5px solid rgba(255,255,255,0.8);
-            overflow: hidden;
-            background: #fff;
-            flex-shrink: 0;
+            font-size: 9.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
         }
-        .student-avatar-box img {
+
+        .user-avatar-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            overflow: hidden;
+            background: #e2e8f0;
+            cursor: pointer;
+        }
+        .user-avatar-circle img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .student-details-text {
-            flex: 1;
-        }
-        .student-details-text .id-text {
-            font-size: 10px;
-            color: #94a3b8;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .student-details-text h2 {
-            font-size: 16px;
+
+        .header-greeting-box h1 {
+            font-size: 22px;
             font-weight: 700;
-            margin: 1px 0;
-            text-transform: uppercase;
+            margin: 0 0 2px 0;
         }
-        .student-details-text p {
-            font-size: 11px;
-            color: #cbd5e1;
-        }
-
-        .hero-bottom-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 10px;
-            font-size: 11px;
-            color: #94a3b8;
-        }
-
-        .btn-portal-logout {
-            background: #dc2626;
-            color: #ffffff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 11.5px;
+        .header-greeting-box h3 {
+            font-size: 15px;
             font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
+            margin: 0;
+            opacity: 0.95;
         }
-        .btn-portal-logout:hover { background: #b91c1c; }
-
-        /* ================= ANNOUNCEMENTS HORIZONTAL FEED ================= */
-        .section-row-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .section-row-head h3 {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1e1e2d;
-        }
-        .section-row-head a {
+        .header-greeting-box p {
             font-size: 12px;
-            color: #4f46e5;
-            font-weight: 600;
-            text-decoration: none;
+            opacity: 0.8;
+            margin-top: 2px;
         }
 
-        .announcements-scroll {
+        /* Floating Search Bar */
+        .search-bar-container {
+            max-width: 500px;
+            margin: -22px auto 20px;
+            padding: 0 16px;
+            position: relative;
+            z-index: 20;
+        }
+        .search-box-pill {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 12px 20px;
             display: flex;
+            align-items: center;
             gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 22px;
-            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
         }
-        .announcement-card {
-            min-width: 160px;
-            max-width: 160px;
-            height: 110px;
-            background: #2b2d42;
-            color: #fff;
-            border-radius: 14px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            text-decoration: none;
-            flex-shrink: 0;
+        .search-box-pill i {
+            color: #6366f1;
+            font-size: 16px;
         }
-        .announcement-card h5 {
-            font-size: 11.5px;
-            font-weight: 600;
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .announcement-card span {
-            font-size: 9.5px;
-            color: #94a3b8;
+        .search-box-pill input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 13.5px;
+            color: #1e293b;
+            background: transparent;
         }
 
-        /* ================= APP ICON GRID (Screenshot Exact) ================= */
-        .app-grid-container {
+        /* ================= CONTENT CONTAINER ================= */
+        .main-body-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .section-header-row h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .section-header-row a {
+            font-size: 12px;
+            color: #6366f1;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* ================= QUICK ACCESS 3-COLUMNS GRID ================= */
+        .quick-access-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-bottom: 25px;
         }
 
-        .app-grid-tile {
+        .quick-card-btn {
             background: #ffffff;
-            border-radius: 14px;
-            padding: 16px 10px;
-            text-align: center;
-            text-decoration: none;
-            color: #334155;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            padding: 14px 10px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
+            align-items: flex-start;
+            text-decoration: none;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #f1f5f9;
+            transition: all 0.25s ease;
         }
-        .app-grid-tile:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        .quick-card-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.06);
             border-color: #cbd5e1;
         }
 
-        .tile-icon-box {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: #f8fafc;
+        .card-icon-round {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: #dc2626; /* Red icons matching screenshot */
+            font-size: 16px;
+            margin-bottom: 10px;
         }
-        .app-grid-tile span {
+
+        .icon-profile { background: #ede9fe; color: #6366f1; }
+        .icon-events { background: #ffedd5; color: #f97316; }
+        .icon-staff { background: #dbeafe; color: #2563eb; }
+        .icon-attendance { background: #d1fae5; color: #059669; }
+        .icon-chatbox { background: #fce7f3; color: #db2777; }
+        .icon-gradesheet { background: #fef9c3; color: #ca8a04; }
+        .icon-gallery { background: #e0f2fe; color: #0284c7; }
+        .icon-fees { background: #ccfbf1; color: #0d9488; }
+        .icon-notices { background: #ede9fe; color: #7c3aed; }
+        .icon-assignments { background: #ffedd5; color: #ea580c; }
+        .icon-exams { background: #dcfce7; color: #16a34a; }
+        .icon-library { background: #e0f2fe; color: #3b82f6; }
+
+        .card-title-text {
             font-size: 11.5px;
-            font-weight: 600;
-            color: #1e1e2d;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        .card-desc-text {
+            font-size: 9.5px;
+            color: #64748b;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .card-arrow-icon {
+            position: absolute;
+            right: 8px;
+            bottom: 8px;
+            font-size: 10px;
+            color: #94a3b8;
+        }
+        .badge-new-pill {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #7c3aed;
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+
+        /* ================= LIVE NOTICES FEED (FROM ADMIN NOTICES) ================= */
+        .notices-list-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .notice-feed-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #f1f5f9;
+        }
+        .notice-feed-card h4 {
+            font-size: 13px;
+            color: #0f172a;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .notice-feed-card p {
+            font-size: 11.5px;
+            color: #475569;
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .notice-feed-card small {
+            font-size: 10px;
+            color: #94a3b8;
         }
 
         /* ================= FIXED BOTTOM NAV BAR ================= */
@@ -245,6 +292,7 @@
             padding: 10px 0;
             z-index: 1000;
         }
+
         .nav-item-link {
             display: flex;
             flex-direction: column;
@@ -254,125 +302,136 @@
             font-size: 10px;
             font-weight: 600;
             gap: 4px;
+            transition: 0.2s;
         }
         .nav-item-link i { font-size: 18px; }
-        .nav-item-link.active-nav { color: #4f46e5; }
+        .nav-item-link.active-nav {
+            color: #4f46e5;
+        }
     </style>
 </head>
 <body>
 
-    <!-- TOP APP BAR -->
-    <header class="app-top-header">
-        <h3>MDA Mustafa Digital Ai School</h3>
-        <div class="bell-icon-wrap" onclick="window.location.href='notices.html'">
-            <i class="far fa-bell"></i>
+    <!-- TOP CURVED GRADIENT HEADER -->
+    <header class="portal-hero-header">
+        <div class="header-top-row">
+            <i class="fas fa-bars nav-menu-icon" onclick="alert('Student Portal Menu')"></i>
+            <div class="header-user-side">
+                <div class="bell-icon-wrap" onclick="window.location.href='notices.html'" title="View Live Notices">
+                    <i class="far fa-bell"></i>
+                    <span class="bell-badge" id="noticeBadgeCount">1</span>
+                </div>
+                <div class="user-avatar-circle" onclick="window.location.href='student-id-card.html'" title="View ID Card">
+                    <img src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=100" alt="Avatar" id="userAvatarImg">
+                </div>
+            </div>
+        </div>
+
+        <div class="header-greeting-box">
+            <h1>Student Portal</h1>
+            <h3>Hello, <span id="headerStudentName">Student</span> 👋</h3>
+            <p>Have a great day ahead!</p>
         </div>
     </header>
 
-    <div class="portal-container">
+    <!-- FLOATING SEARCH BAR -->
+    <div class="search-bar-container">
+        <div class="search-box-pill">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search anything...">
+        </div>
+    </div>
 
-        <!-- STUDENT PROFILE BANNER (Screenshot Exact Match) -->
-        <div class="student-hero-banner">
-            <div class="hero-inner-flex">
-                <div class="student-avatar-box">
-                    <img id="studentProfileImg" src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=150" alt="Avatar">
-                </div>
-                <div class="student-details-text">
-                    <span class="id-text" id="displayAdmNo">ADM-0000</span>
-                    <h2 id="displayName">Student Name</h2>
-                    <p id="displayClass">Class 10 (Science)</p>
-                </div>
-            </div>
-
-            <div class="hero-bottom-row">
-                <span id="currentDateText">Monday, 2 November 2026</span>
-                <a href="student-login.html" class="btn-portal-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
-            </div>
+    <!-- MAIN BODY -->
+    <div class="main-body-container">
+        
+        <!-- QUICK ACCESS SECTION -->
+        <div class="section-header-row">
+            <h3>Quick Access</h3>
+            <a href="student-login.html" style="color:#dc2626; font-weight:700;"><i class="fas fa-sign-out-alt"></i> Switch / Logout</a>
         </div>
 
-        <!-- ANNOUNCEMENTS SCROLLABLE FEED -->
-        <div class="section-row-head">
-            <h3>Announcements</h3>
+        <div class="quick-access-grid">
+            <a href="student-id-card.html" class="quick-card-btn">
+                <div class="card-icon-round icon-profile"><i class="fas fa-user"></i></div>
+                <span class="card-title-text">Profile</span>
+                <span class="card-desc-text">View ID Card</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <a href="student-timetable.html" class="quick-card-btn">
+                <div class="card-icon-round icon-events"><i class="fas fa-calendar-alt"></i></div>
+                <span class="card-title-text">Events</span>
+                <span class="card-desc-text">Class routine</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <a href="attendance.html" class="quick-card-btn">
+                <div class="card-icon-round icon-attendance"><i class="fas fa-clipboard-check"></i></div>
+                <span class="card-title-text">Attendance</span>
+                <span class="card-desc-text">Check record</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <a href="print-report-card.html" class="quick-card-btn">
+                <div class="card-icon-round icon-gradesheet"><i class="fas fa-chart-bar"></i></div>
+                <span class="card-title-text">GradeSheet</span>
+                <span class="card-desc-text">Result card</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <a href="print-fee-voucher.html" class="quick-card-btn">
+                <div class="card-icon-round icon-fees"><i class="fas fa-file-invoice-dollar"></i></div>
+                <span class="card-title-text">Fees Details</span>
+                <span class="card-desc-text">Challan & status</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <a href="notices.html" class="quick-card-btn">
+                <span class="badge-new-pill">NEW</span>
+                <div class="card-icon-round icon-notices"><i class="fas fa-file-alt"></i></div>
+                <span class="card-title-text">Notices</span>
+                <span class="card-desc-text">School updates</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <a href="student-diary.html" class="quick-card-btn">
+                <div class="card-icon-round icon-assignments"><i class="fas fa-book-open"></i></div>
+                <span class="card-title-text">Assignments</span>
+                <span class="card-desc-text">Daily homework</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <a href="student-live-class.html" class="quick-card-btn">
+                <div class="card-icon-round icon-exams"><i class="fas fa-video"></i></div>
+                <span class="card-title-text">Exams</span>
+                <span class="card-desc-text">Online meet</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <a href="student-e-library.html" class="quick-card-btn">
+                <div class="card-icon-round icon-library"><i class="fas fa-book"></i></div>
+                <span class="card-title-text">Library</span>
+                <span class="card-desc-text">PDF E-Books</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+        </div>
+
+        <!-- REAL-TIME NOTICES FEED (LOADS LIVE ADMIN NOTICES) -->
+        <div class="section-header-row">
+            <h3>School Announcements</h3>
             <a href="notices.html">View All</a>
         </div>
 
-        <div class="announcements-scroll" id="announcementsFeed">
-            <a href="exam-schedule.html" class="announcement-card">
-                <h5>Exam Schedule (Mid Term)</h5>
-                <span>02 Nov 2026</span>
-            </a>
-            <a href="notices.html" class="announcement-card" style="background:#3b82f6;">
-                <h5>Happy Iqbal Day Holiday</h5>
-                <span>09 Nov 2026</span>
-            </a>
-        </div>
-
-        <!-- APP ICON GRID (Screenshot Exact Red Icons Style) -->
-        <div class="section-row-head" style="margin-top: 10px;">
-            <h3>Academics & Utilities</h3>
-        </div>
-
-        <div class="app-grid-container">
-            
-            <!-- 1. Home Work -->
-            <a href="student-diary.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="fas fa-book-open"></i></div>
-                <span>Home Work</span>
-            </a>
-
-            <!-- 2. Attendance -->
-            <a href="attendance.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="fas fa-calendar-check"></i></div>
-                <span>Attendance</span>
-            </a>
-
-            <!-- 3. Timetable -->
-            <a href="student-timetable.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="far fa-clock"></i></div>
-                <span>Timetable</span>
-            </a>
-
-            <!-- 4. Assignment -->
-            <a href="student-diary.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="fas fa-clipboard-list"></i></div>
-                <span>Assignment</span>
-            </a>
-
-            <!-- 5. Fee Details -->
-            <a href="print-fee-voucher.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="fas fa-file-invoice-dollar"></i></div>
-                <span>Fee Challan</span>
-            </a>
-
-            <!-- 6. Exam Report -->
-            <a href="print-report-card.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="fas fa-chart-bar"></i></div>
-                <span>Exam-Report</span>
-            </a>
-
-            <!-- 7. ID Card -->
-            <a href="student-id-card.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="fas fa-id-badge"></i></div>
-                <span>ID Card</span>
-            </a>
-
-            <!-- 8. Live Meet -->
-            <a href="student-live-class.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="fas fa-video"></i></div>
-                <span>Live Class</span>
-            </a>
-
-            <!-- 9. Library -->
-            <a href="student-e-library.html" class="app-grid-tile">
-                <div class="tile-icon-box"><i class="fas fa-book"></i></div>
-                <span>Library</span>
-            </a>
-
+        <div class="notices-list-wrapper" id="liveNoticesFeed">
+            <div class="notice-feed-card">
+                <h4><i class="fas fa-spinner fa-spin text-primary"></i> Loading announcements...</h4>
+            </div>
         </div>
 
     </div>
 
-    <!-- FIXED BOTTOM NAV BAR -->
+    <!-- FIXED BOTTOM NAVIGATION BAR -->
     <nav class="bottom-nav-bar">
         <a href="student-home.html" class="nav-item-link active-nav">
             <i class="fas fa-home"></i>
@@ -392,31 +451,51 @@
         </a>
     </nav>
 
-    <!-- REAL-TIME SESSION LOADER SCRIPT -->
+    <!-- REAL-TIME DB ENGINE & AUTH GUARD SCRIPT -->
+    <script src="assets/js/realtime-db.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. STRICT LOGIN GUARD (Agar user login nahi hai, toh foran login page par bhejo)
             const activeStudent = JSON.parse(sessionStorage.getItem('mda_active_student'));
-            if (activeStudent) {
-                let name = activeStudent.fullName || activeStudent.name || "Student";
-                let adm = activeStudent.admNo || activeStudent.admissionNo || "ADM-0000";
-                let cls = activeStudent.class || "Class 10";
-
-                document.getElementById('displayName').innerText = name;
-                document.getElementById('displayAdmNo').innerText = adm;
-                document.getElementById('displayClass').innerText = cls;
-
-                if (activeStudent.photoUrl && activeStudent.photoUrl.trim() !== '') {
-                    document.getElementById('studentProfileImg').src = activeStudent.photoUrl;
-                } else {
-                    document.getElementById('studentProfileImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=2b2d42&color=fff&size=150`;
-                }
+            if (!activeStudent) {
+                alert("🔒 Login Required!\nPehle apne Admission No aur Password se Login karein.");
+                window.location.href = 'student-login.html';
+                return;
             }
 
-            // Current Date
-            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            const now = new Date();
-            document.getElementById('currentDateText').innerText = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+            // Populate Student Profile Header
+            let name = activeStudent.fullName || activeStudent.name || "Student";
+            document.getElementById('headerStudentName').innerText = name;
+            document.getElementById('userAvatarImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=3b82f6&color=fff&size=100`;
+
+            // 2. FETCH LIVE NOTICES FROM FIREBASE (Jo Admin ne notices.html se add kiye hain)
+            try {
+                let notices = await mdaFetchData('notices');
+                const feedContainer = document.getElementById('liveNoticesFeed');
+                document.getElementById('noticeBadgeCount').innerText = notices.length || 0;
+
+                if (notices && notices.length > 0) {
+                    feedContainer.innerHTML = '';
+                    notices.reverse().slice(0, 3).forEach(n => {
+                        feedContainer.innerHTML += `
+                            <div class="notice-feed-card">
+                                <h4><i class="fas fa-bullhorn text-warning"></i> ${n.title}</h4>
+                                <p>${n.content}</p>
+                                <small><i class="far fa-calendar-alt"></i> Published: ${n.date || 'Today'}</small>
+                            </div>
+                        `;
+                    });
+                } else {
+                    feedContainer.innerHTML = `
+                        <div class="notice-feed-card" style="text-align:center; color:#94a3b8; padding:20px;">
+                            <i class="fas fa-inbox fa-2x" style="margin-bottom:6px; display:block;"></i>
+                            No announcements posted by admin yet.
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                console.error("Error loading notices:", err);
+            }
         });
     </script>
 </body>
