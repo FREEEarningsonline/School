@@ -3,46 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Student Profile - MDA Mustafa Digital Ai School</title>
+    <title>Master Student Profile - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Modules CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/tables.css">
     <link rel="stylesheet" href="assets/css/profile.css">
 
     <style>
         .profile-grid { display: grid; grid-template-columns: 320px 1fr; gap: 20px; }
-        .action-buttons-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding: 15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-        .btn-action { padding: 8px 15px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
-        .btn-outline { background: #fff; border: 1px solid #ddd; color: #444; }
-        .btn-outline:hover { background: #f8f9fa; border-color: #ccc; }
-        .btn-success { background: #16a34a; border: 1px solid #16a34a; color: #fff; }
-        .btn-success:hover { background: #15803d; }
-        .profile-card { background: #fff; padding: 25px 20px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.03); text-align: center; border-top: 4px solid #7c3aed; position: sticky; top: 80px; }
-        
-        /* Profile Image Hover Edit Effect */
-        .profile-img-container { 
-            width: 100px; height: 100px; margin: 0 auto 15px; border-radius: 10px; overflow: hidden; 
-            border: 3px solid #f4f6f9; position: relative; cursor: pointer; 
+        .action-buttons-row {
+            display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 15px;
+            background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid #f0f0f0;
         }
-        .profile-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-        .profile-img-container:hover img { filter: brightness(0.7); }
-        .edit-photo-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.6); 
-            color: #fff; font-size: 10px; padding: 4px 0; text-align: center; font-weight: 600;
+        .btn-action {
+            padding: 7px 12px; border-radius: 6px; font-size: 11.5px; font-weight: 600; cursor: pointer;
+            transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border: 1px solid #ddd; background: #fff; color: #334155;
         }
+        .btn-action:hover { background: #f8fafc; border-color: #94a3b8; }
+        .btn-action.btn-green { background: #16a34a; color: #fff; border-color: #16a34a; }
+        .btn-action.btn-green:hover { background: #15803d; }
+        .btn-action.btn-purple { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+        .btn-action.btn-purple:hover { background: #6d28d9; }
+        .btn-action.btn-red { background: #dc2626; color: #fff; border-color: #dc2626; }
+        .btn-action.btn-red:hover { background: #b91c1c; }
 
-        .student-name { font-size: 18px; color: #333; margin-bottom: 10px; font-weight: 700; text-transform: uppercase; }
+        .profile-card { background: #fff; padding: 25px 20px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.03); text-align: center; border-top: 4px solid #7c3aed; position: sticky; top: 80px; }
+        .profile-img-container { width: 100px; height: 100px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 3px solid #f4f6f9; position: relative; cursor: pointer; }
+        .profile-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .student-name { font-size: 18px; color: #0f172a; margin-bottom: 8px; font-weight: 700; text-transform: uppercase; }
         .badges-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-bottom: 20px; }
         .badge-pill { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 600; }
+        
         .details-list { text-align: left; }
-        .detail-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 12px; }
+        .detail-item { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px dashed #e2e8f0; font-size: 12px; }
         .detail-item span { color: #64748b; font-weight: 500; }
         .detail-item strong { color: #1e293b; font-weight: 600; text-align: right; }
-        .section-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.03); overflow: hidden; margin-bottom: 20px; }
+
+        .section-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.03); overflow: hidden; margin-bottom: 20px; border: 1px solid #f0f0f0; }
         .fee-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 20px; }
         .fee-stat-box { padding: 15px; border-radius: 8px; text-align: center; }
-        .fee-stat-box h3 { font-size: 20px; margin-bottom: 5px; }
+        .fee-stat-box h3 { font-size: 20px; margin-bottom: 4px; }
         .fee-stat-box p { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; }
         .box-total { background: #f4eaff; color: #7c3aed; border: 1px solid #e9d5ff; }
         .box-paid { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
@@ -54,13 +57,82 @@
 </head>
 <body>
 
-    <!-- YAHAN APKA SIDEBAR AAYEGA JO PEHLE THA (Dashboard wala) -->
-    <!-- (Clean code ke liye sidebar main skip kar raha hu, aap apna purana sidebar yahin lagayein) -->
-    
-    <main class="main-content" style="margin-left:0; width:100%;">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html" class="active"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
         <header class="top-header">
             <div class="header-left">
-                <h2>Student Profile (Live Database)</h2>
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Master Student Profile (Real-Time Database)</h2>
             </div>
             <div class="header-right">
                 <a href="all-students.html" class="btn-back" style="background:#f1f5f9; padding:8px 15px; border-radius:6px; font-size:13px; text-decoration:none; color:#333; font-weight:600;"><i class="fas fa-arrow-left"></i> Back to Directory</a>
@@ -69,26 +141,24 @@
 
         <div class="dashboard-content">
             
-            <!-- ACTION BUTTONS ROW (Dynamic Hrefs) -->
+            <!-- MASTER ACTION BUTTONS ROW (Image 9 Exact Layout) -->
             <div class="action-buttons-row">
-                <a href="#" id="btnTcPrint" class="btn-action btn-outline"><i class="fas fa-file-alt"></i> TC Print</a>
-                <a href="#" id="btnIdPrint" class="btn-action btn-outline"><i class="fas fa-id-badge"></i> ID Card</a>
-                <a href="#" id="btnReportPrint" class="btn-action btn-outline"><i class="fas fa-chart-bar"></i> Report Card</a>
-                <a href="#" id="btnCollectFee" class="btn-action btn-success"><i class="fas fa-bolt"></i> Collect Fee</a>
+                <a href="#" id="btnTcPrint" class="btn-action"><i class="fas fa-file-alt text-purple"></i> TC Print</a>
+                <a href="#" id="btnIdPrint" class="btn-action"><i class="fas fa-id-badge text-warning"></i> ID Card</a>
+                <a href="#" id="btnReportPrint" class="btn-action"><i class="fas fa-chart-bar text-primary"></i> Report Card</a>
+                <a href="#" id="btnCollectFee" class="btn-action btn-green"><i class="fas fa-bolt"></i> Quick Fee Collect</a>
+                <a href="#" id="btnFeeChallan" class="btn-action btn-purple" target="_blank"><i class="fas fa-file-invoice-dollar"></i> Fee Challan</a>
+                <button class="btn-action btn-red" onclick="deleteThisStudent()"><i class="fas fa-trash"></i> Archive / Delete</button>
             </div>
 
             <div class="profile-grid">
                 
-                <!-- LEFT COLUMN: Profile Detail Card -->
+                <!-- LEFT COLUMN: Profile Card -->
                 <div class="profile-left">
                     <div class="profile-card">
-                        
-                        <!-- PROFILE PICTURE WITH EDIT OPTION -->
-                        <div class="profile-img-container" onclick="updateProfilePhoto()" title="Click to Change Photo">
-                            <img id="profImg" src="https://ui-avatars.com/api/?name=Loading&background=ddd&color=333" alt="Student Photo">
-                            <div class="edit-photo-overlay"><i class="fas fa-camera"></i> Change</div>
+                        <div class="profile-img-container" onclick="updateStudentPhoto()" title="Click to update student photo">
+                            <img id="profImg" src="https://ui-avatars.com/api/?name=Loading&background=ddd&color=333&size=200" alt="Student Photo">
                         </div>
-
                         <h3 class="student-name" id="profName">Loading...</h3>
                         
                         <div class="badges-row">
@@ -103,32 +173,82 @@
                             <div class="detail-item"><span>Mother:</span> <strong id="profMother">...</strong></div>
                             <div class="detail-item"><span>D.O.B:</span> <strong id="profDob">...</strong></div>
                             <div class="detail-item"><span>Phone:</span> <strong id="profPhone">...</strong></div>
-                            <div class="detail-item"><span>CNIC/B-Form:</span> <strong id="profCnic">...</strong></div>
+                            <div class="detail-item"><span>B-Form / CNIC:</span> <strong id="profCnic">...</strong></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- RIGHT COLUMN -->
+                <!-- RIGHT COLUMN: Fees & Transactions -->
                 <div class="profile-right">
                     
+                    <!-- Fee Summary Card -->
                     <div class="section-card">
-                        <div class="card-header"><h4><i class="fas fa-wallet text-success"></i> Real-Time Fee Summary</h4></div>
+                        <div class="card-header">
+                            <h4><i class="fas fa-wallet text-success"></i> Real-Time Fee Summary</h4>
+                        </div>
+                        
                         <div class="fee-stats-grid">
-                            <div class="fee-stat-box box-total"><h3 id="statTotalFee">Rs. 0</h3><p>TOTAL FEE</p></div>
-                            <div class="fee-stat-box box-paid"><h3 id="statPaidFee">Rs. 0</h3><p>TOTAL PAID</p></div>
-                            <div class="fee-stat-box box-pending"><h3 id="statPendingFee">Rs. 0</h3><p>PENDING DUES</p></div>
+                            <div class="fee-stat-box box-total">
+                                <h3 id="statTotalFee">Rs. 0</h3>
+                                <p>TOTAL FEE</p>
+                            </div>
+                            <div class="fee-stat-box box-paid">
+                                <h3 id="statPaidFee">Rs. 0</h3>
+                                <p>TOTAL PAID</p>
+                            </div>
+                            <div class="fee-stat-box box-pending">
+                                <h3 id="statPendingFee">Rs. 0</h3>
+                                <p>PENDING DUES</p>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Fee Transactions Table -->
                     <div class="section-card">
-                        <div class="card-header"><h4><i class="fas fa-history text-primary"></i> Fee Transactions History</h4></div>
+                        <div class="card-header">
+                            <h4><i class="fas fa-history text-primary"></i> Fee Transactions History</h4>
+                        </div>
                         <div class="table-responsive">
                             <table class="compact-table">
                                 <thead>
-                                    <tr><th>RECEIPT NO</th><th>DATE</th><th>AMOUNT</th><th>PAYMENT MODE</th></tr>
+                                    <tr>
+                                        <th>RECEIPT NO</th>
+                                        <th>DATE</th>
+                                        <th>AMOUNT PAID</th>
+                                        <th>PAYMENT MODE</th>
+                                    </tr>
                                 </thead>
                                 <tbody id="transactionsTableBody">
-                                    <tr><td colspan="4" style="text-align:center; padding:20px; color:#94a3b8;"><i class="fas fa-spinner fa-spin"></i> Loading transactions...</td></tr>
+                                    <tr>
+                                        <td colspan="4" style="text-align: center; padding: 25px; color: #94a3b8;">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading transactions from Firebase...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Assigned Subjects Table -->
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h4><i class="fas fa-book text-warning"></i> Enrolled Curriculum Subjects</h4>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="compact-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>SUBJECT NAME</th>
+                                        <th>TYPE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td><strong>English Compulsory</strong></td><td>Theory (Max: 100)</td></tr>
+                                    <tr><td>2</td><td><strong>Mathematics (Science)</strong></td><td>Theory (Max: 100)</td></tr>
+                                    <tr><td>3</td><td><strong>Computer Science</strong></td><td>Theory + Practical (Max: 150)</td></tr>
+                                    <tr><td>4</td><td><strong>Physics</strong></td><td>Theory + Practical (Max: 150)</td></tr>
+                                    <tr><td>5</td><td><strong>Urdu Lazmi</strong></td><td>Theory (Max: 100)</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -136,56 +256,76 @@
 
                 </div>
             </div>
+
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
+    <script src="assets/js/main.js"></script>
     <script src="assets/js/realtime-db.js"></script>
+
     <script>
         let currentStudentFirebaseId = null;
+        let currentAdmNo = null;
 
-        async function loadStudentProfile() {
+        async function loadMasterStudentProfile() {
             const urlParams = new URLSearchParams(window.location.search);
             let targetAdm = urlParams.get('adm');
 
             let students = await mdaFetchData('students');
-            let student = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+            let student = null;
+
+            if (targetAdm) {
+                student = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+            } else if (students.length > 0) {
+                student = students[0]; // Default to first student if URL param missing
+                targetAdm = student.admNo || student.admissionNo;
+            }
 
             if (!student) {
-                alert("Student not found!");
+                document.querySelector('.dashboard-content').innerHTML = `
+                    <div style="text-align:center; padding:60px; background:#fff; border-radius:10px;">
+                        <h2 style="color:#dc2626;">Student Record Not Found!</h2>
+                        <p style="color:#64748b; margin-top:5px;">Please select a valid student from the All Students directory.</p>
+                        <a href="all-students.html" class="btn-back" style="display:inline-block; margin-top:15px; background:#7239ea; color:#fff;">Go to Directory</a>
+                    </div>
+                `;
                 return;
             }
 
-            // Save ID for photo update
             currentStudentFirebaseId = student.firebaseId;
+            currentAdmNo = targetAdm;
 
-            // Connect Print Buttons with the exact Admission Number
+            // Connect Action Buttons dynamically
             document.getElementById('btnTcPrint').href = `print-tc.html?adm=${targetAdm}`;
             document.getElementById('btnIdPrint').href = `print-id-card.html?adm=${targetAdm}`;
             document.getElementById('btnReportPrint').href = `print-report-card.html?adm=${targetAdm}`;
-            document.getElementById('btnCollectFee').href = `fee-collection.html?adm=${targetAdm}`; // Directly goes to fee collection of this student!
+            document.getElementById('btnCollectFee').href = `quick-fee.html`;
+            document.getElementById('btnFeeChallan').href = `print-fee-voucher.html?adm=${targetAdm}`;
 
-            // Fill Data
-            let sName = student.fullName || student.name || "Unknown";
+            // Inject Profile Data
+            let sName = student.fullName || student.name || "Student Name";
             document.getElementById('profName').innerText = sName;
             document.getElementById('profAdm').innerText = targetAdm;
-            document.getElementById('profClass').innerText = student.class || "N/A";
-            document.getElementById('profGender').innerText = student.gender || "N/A";
-            document.getElementById('profFather').innerText = student.fatherName || "N/A";
-            document.getElementById('profMother').innerText = student.motherName || "N/A";
-            document.getElementById('profDob').innerText = student.dob || "N/A";
-            document.getElementById('profPhone').innerText = student.phone || "N/A";
-            document.getElementById('profCnic').innerText = student.cnic || "N/A";
+            document.getElementById('profClass').innerText = student.class || "Class 10";
+            document.getElementById('profGender').innerText = student.gender || "Male";
+            document.getElementById('profFather').innerText = student.fatherName || "-";
+            document.getElementById('profMother').innerText = student.motherName || "-";
+            document.getElementById('profDob').innerText = student.dob || "-";
+            document.getElementById('profPhone').innerText = student.phone || "-";
+            document.getElementById('profCnic').innerText = student.cnic || "-";
 
-            // Load Profile Photo (If exists in DB, otherwise generate Avatar)
-            if(student.photoUrl && student.photoUrl.trim() !== '') {
+            // Photo
+            if (student.photoUrl && student.photoUrl.trim() !== '') {
                 document.getElementById('profImg').src = student.photoUrl;
             } else {
                 document.getElementById('profImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(sName)}&background=7c3aed&color=fff&size=200`;
             }
 
-            // Load Fees
+            // Load Fee Transactions for this student
             let feesData = await mdaFetchData('fees');
-            let studentFees = feesData.filter(f => f.studentName === sName);
+            let studentFees = feesData.filter(f => (f.admNo === targetAdm) || (f.studentName === sName));
+
             let totalPaid = 0;
             const tbody = document.getElementById('transactionsTableBody');
             tbody.innerHTML = '';
@@ -204,37 +344,50 @@
                     `;
                 });
             } else {
-                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#94a3b8;">No fee payments recorded.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #94a3b8;">No fee payment transactions recorded yet.</td></tr>`;
             }
 
             let pending = parseFloat(student.pendingDue || 0);
-            document.getElementById('statTotalFee').innerText = `Rs. ${(totalPaid + pending).toLocaleString()}`;
+            let totalAssigned = totalPaid + pending;
+
+            document.getElementById('statTotalFee').innerText = `Rs. ${totalAssigned.toLocaleString()}`;
             document.getElementById('statPaidFee').innerText = `Rs. ${totalPaid.toLocaleString()}`;
             document.getElementById('statPendingFee').innerText = `Rs. ${pending.toLocaleString()}`;
         }
 
-        // ================= UPDATE PHOTO FUNCTION =================
-        async function updateProfilePhoto() {
-            let newUrl = prompt("Enter New Profile Photo URL (Direct Image Link):");
-            if(newUrl && newUrl.trim() !== "" && currentStudentFirebaseId) {
-                
-                document.getElementById('profImg').src = newUrl; // Instant preview
-                
-                // Update specific field in Firebase Database
+        // Update Student Photo
+        async function updateStudentPhoto() {
+            let newUrl = prompt("Enter Direct Image URL for Student Profile Photo:");
+            if (newUrl && newUrl.trim() !== "" && currentStudentFirebaseId) {
+                document.getElementById('profImg').src = newUrl.trim();
                 try {
                     await fetch(`${FIREBASE_DB_URL}/students/${currentStudentFirebaseId}.json`, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ photoUrl: newUrl.trim() })
                     });
-                    alert("Profile Picture successfully updated in Database!");
-                } catch (error) {
-                    alert("Error saving picture to database.");
+                    alert("Profile picture updated successfully in Firebase!");
+                } catch (err) {
+                    alert("Error saving photo to database.");
                 }
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadStudentProfile);
+        // Delete Student
+        async function deleteThisStudent() {
+            if (!confirm(`⚠️ Are you sure you want to delete this student record (${currentAdmNo}) from database?`)) return;
+            try {
+                await fetch(`${FIREBASE_DB_URL}/students/${currentStudentFirebaseId}.json`, {
+                    method: 'DELETE'
+                });
+                alert("Student record deleted successfully!");
+                window.location.href = 'all-students.html';
+            } catch (err) {
+                alert("Error deleting student.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMasterStudentProfile);
     </script>
 </body>
 </html>
